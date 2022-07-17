@@ -33,6 +33,7 @@ github_username:  jekyll
 theme: jekyll-theme-minimal
 plugins:
   - jekyll-feed
+markdown: GFM
 
 # Exclude from processing.
 # The following items will not be processed, by default.
