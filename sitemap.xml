@@ -11,17 +11,17 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://ryanwhite1.github.io/Simulated-Universe/Datasets/</loc>
+         <lastmod>2022-07-18</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/GitHub%20README/</loc>
          <lastmod>2022-07-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/License/</loc>
-         <lastmod>2022-07-18</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://ryanwhite1.github.io/Simulated-Universe/datasets/</loc>
          <lastmod>2022-07-18</lastmod>
          <changefreq>daily</changefreq>
     </url>
