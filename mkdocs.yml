@@ -1,0 +1,11 @@
+site_name: Distance Ladder Simulated Universe
+theme:
+  name: bootstrap4
+
+nav: 
+    - 'Home': 'index.md'
+    - 'Analysing Data':
+        - 'h': 'Analysing Data/h.md'
+    - 'About':
+        - 'License': 'License.md'
+    
