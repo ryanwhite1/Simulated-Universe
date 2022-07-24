@@ -46,7 +46,7 @@ Several real aspects of astronomy are modelled (to varying degrees of accuracy) 
  
  - Rotation curves are simulated accurately according to newtonian physics, with black holes and dark matter (via the Navarro-Frenk-White profile) influencing rotation velocities. Spiral galaxies have coherent rotation, with all stars (except the central black hole cluster) orbiting in the orbital plane in the same direction. Elliptical galaxies have random velocity directions, but velocity magnitudes according to the same rotation curve profiles. This random velocity is really apparent in the doppler image below in the Galaxy Clusters section.
  
-![](/MiscGithubImages/localradialvel.jpg)
+![](MiscGithubImages/localradialvel.jpg)
 ### Black Holes 
 <p align="middle">
 <img src="../MiscGithubImages/FRI lobe.png" style="height:250px;"/><img src="../MiscGithubImages/FRII lobe.png" style="height:250px;"/>
