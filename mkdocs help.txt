@@ -8,6 +8,7 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 * `mkdocs serve` - Start the live-reloading docs server.
 * `mkdocs build` - Build the documentation site.
 * `mkdocs -h` - Print help message and exit.
+* `mkdocs gh-deploy` - 
 
 ## Project layout
 
@@ -15,3 +16,9 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
     docs/
         index.md  # The documentation homepage.
         ...       # Other markdown pages, images and other files.
+
+### for use in this project
+1. Navigate to the `GHPagesData` folder via the command prompt
+2. run `mkdocs serve`
+2.5. If you want to preview the site as you're editing, go to `localhost:8000` in browser.
+3. 
