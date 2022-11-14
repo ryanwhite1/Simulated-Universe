@@ -19,6 +19,5 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 
 ### for use in this project
 1. Navigate to the `GHPagesData` folder via the command prompt
-2. run `mkdocs serve`
-2.5. If you want to preview the site as you're editing, go to `localhost:8000` in browser.
-3. 
+2. If you want to preview the site as you're editing run `mkdocs serve` and go to `localhost:8000` in browser.
+3. Finally, when ready to push to github, run `mkdocs gh-deploy`.
