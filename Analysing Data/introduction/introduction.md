@@ -23,7 +23,7 @@ In principle, and with enough effort, you could find most of if not all of the p
 		- Are there different populations of stars in different areas of a galaxy?
 	 - Galaxy rotation curves
 		- Do galaxies have black holes?
-			- Do all black holes have radio emission? Does radio emission depend on galaxy type?
+			- Do black holes have radio emission? Does radio emission depend on galaxy type?
 			- How massive are the black holes?
 		- Do galaxies have dark matter?
 ??? note "Galaxy clusters:"
@@ -33,8 +33,9 @@ In principle, and with enough effort, you could find most of if not all of the p
 	 - Galaxy type vs position in the cluster?
 ??? note "Universe overall:"
 	 - What is the hubble constant? (**_this is the main goal of analysis!_**)
-	 - Where are supernovae? How often do they occur? 
+	 - Where are supernovae/flashes? How often do they occur? What is their intrinsic brightness?
 	 - Is the universe homogeneous and/or isotropic? 
+	 - Are galaxies the same colour at any distance?
 	 
 ### How you can find it:
 
