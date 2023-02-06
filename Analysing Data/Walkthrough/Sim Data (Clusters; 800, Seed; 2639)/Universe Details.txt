@@ -7,21 +7,21 @@ Has Dark Matter?            | True
 Universe Homogeneous?       | False 
 Universe Isotropic?         | False 
 Universe Radius             | 450000 (pc)
-Hubble Const.               | 2962.944 (km/s/Mpc)
-Local Galaxy Type           | SBb 
-Dist. to local galax center | 27.86 (pc)
-Radius of local galaxy      | 86.24 (pc)
-Local Galax Black Hole Mass | 102.13 Solar Masses 
+Hubble Const.               | 3964.683 (km/s/Mpc)
+Local Galaxy Type           | SBa 
+Dist. to local galax center | 29.0 (pc)
+Radius of local galaxy      | 90.44 (pc)
+Local Galax Black Hole Mass | 90.33 Solar Masses 
 Number of clusters          | 800
-Number of galaxies          | 423 local and 5807 distant
+Number of galaxies          | 418 local and 5703 distant
 
 
 Variable Star Properties    | [RoughAvePeriod  LightcurveShape  PeriodLumGradient  PeriodLumYInt]
 ----------------------------|--------------------------------------------------------------------
 Variable Stars?             | True
 Variable Class:             | Short
-                            | [24.285693093819248, 'Saw', 0.16718923825730678, -1.97900851338271]
+                            | [24.084217786964338, 'Tri', -0.18276256383619643, 7.148661672064671]
 Variable Class:             | Long
-                            | [43.891118614535245, 'Sine', 0.1341509400541775, -0.04326546845305934]
+                            | [45.72310686000992, 'Saw', -0.11261226669780605, 11.203366142810236]
 Variable Class:             | Longest
-                            | [88.48297201721876, 'Tri', -0.1400350862290871, 17.284708729680602]
+                            | [83.95033311387706, 'Sine', -0.1289854910025569, 16.03432245430129]
