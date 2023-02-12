@@ -578,7 +578,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Analysing Data/Walkthrough/Distance Ladder II; X-Ray Flashes and Distance Galaxies.ipynb" class="md-nav__link">
+      <a href="../Distance%20Ladder%20II%3B%20X-Ray%20Flashes%20and%20Distant%20Galaxies/" class="md-nav__link">
         Distance Ladder II
       </a>
     </li>
@@ -1730,7 +1730,7 @@ Licensed under the Apache License, Version 2.0.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1785,7 +1785,7 @@ for clusterFile in os.listdir(datapath + '/Star Clusters'):
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1833,18 +1833,18 @@ for clusterFile in os.listdir(datapath + '/Star Clusters'):
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">period</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">periods</span><span class="p">):</span> 
         <span class="k">if</span> <span class="mi">20</span> <span class="o">&lt;=</span> <span class="n">period</span> <span class="o">&lt;=</span> <span class="mi">35</span><span class="p">:</span>
             <span class="n">intr_lumin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.086</span> <span class="o">*</span> <span class="n">period</span> <span class="o">+</span> <span class="mf">28.25</span><span class="p">)</span>
-            <span class="n">AB</span> <span class="o">=</span> <span class="mf">0.086</span> <span class="o">*</span> <span class="n">period</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mf">0.036</span> <span class="o">/</span> <span class="mf">0.086</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.1</span> <span class="o">/</span> <span class="n">period</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-            <span class="n">AB_C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">AB</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.96</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">AB</span> <span class="o">=</span> <span class="mf">0.087</span> <span class="o">*</span> <span class="n">period</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mf">0.002</span> <span class="o">/</span> <span class="mf">0.087</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.1</span> <span class="o">/</span> <span class="n">period</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">AB_C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">AB</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.04</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
             <span class="n">lumin_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">intr_lumin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="n">AB_C</span><span class="p">)</span>
         <span class="k">if</span> <span class="mi">35</span> <span class="o">&lt;=</span> <span class="n">period</span> <span class="o">&lt;=</span> <span class="mi">55</span><span class="p">:</span>
             <span class="n">intr_lumin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.087</span> <span class="o">*</span> <span class="n">period</span> <span class="o">+</span> <span class="mf">33.72</span><span class="p">)</span>
-            <span class="n">AB</span> <span class="o">=</span> <span class="mf">0.087</span> <span class="o">*</span> <span class="n">period</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mf">0.044</span> <span class="o">/</span> <span class="mf">0.087</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.1</span> <span class="o">/</span> <span class="n">period</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-            <span class="n">AB_C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">AB</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">2.09</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">AB</span> <span class="o">=</span> <span class="mf">0.087</span> <span class="o">*</span> <span class="n">period</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mf">0.002</span> <span class="o">/</span> <span class="mf">0.087</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.1</span> <span class="o">/</span> <span class="n">period</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">AB_C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">AB</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.08</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
             <span class="n">lumin_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">intr_lumin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="n">AB_C</span><span class="p">)</span>
         <span class="k">elif</span> <span class="mi">80</span> <span class="o">&lt;=</span> <span class="n">period</span> <span class="o">&lt;=</span> <span class="mi">110</span><span class="p">:</span>
             <span class="n">intr_lumin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.087</span> <span class="o">*</span> <span class="n">period</span> <span class="o">+</span> <span class="mf">34.35</span><span class="p">)</span>
-            <span class="n">AB</span> <span class="o">=</span> <span class="mf">0.087</span> <span class="o">*</span> <span class="n">period</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mf">0.017</span> <span class="o">/</span> <span class="mf">0.087</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.1</span> <span class="o">/</span> <span class="n">period</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-            <span class="n">AB_C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">AB</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">1.67</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">AB</span> <span class="o">=</span> <span class="mf">0.087</span> <span class="o">*</span> <span class="n">period</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mf">0.001</span> <span class="o">/</span> <span class="mf">0.087</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.1</span> <span class="o">/</span> <span class="n">period</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">AB_C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">AB</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.06</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
             <span class="n">lumin_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">intr_lumin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="n">AB_C</span><span class="p">)</span>
             
     <span class="c1"># now to finally compare intr_lumin against the fluxes to obtain distances</span>
@@ -1907,18 +1907,18 @@ for num, name in enumerate(GalaxyNames): # iterate over the identified galaxies
     for i, period in enumerate(periods): 
         if 20 <= period <= 35:
             intr_lumin[i] = 10**(-0.086 * period + 28.25)
-            AB = 0.086 * period * np.sqrt((0.036 / 0.086)**2 + (0.1 / period)**2)
-            AB_C = np.sqrt(AB**2 + 0.96**2)
+            AB = 0.087 * period * np.sqrt((0.002 / 0.087)**2 + (0.1 / period)**2)
+            AB_C = np.sqrt(AB**2 + 0.04**2)
             lumin_err[i] = intr_lumin[i] * (np.log(10) * AB_C)
         if 35 <= period <= 55:
             intr_lumin[i] = 10**(-0.087 * period + 33.72)
-            AB = 0.087 * period * np.sqrt((0.044 / 0.087)**2 + (0.1 / period)**2)
-            AB_C = np.sqrt(AB**2 + 2.09**2)
+            AB = 0.087 * period * np.sqrt((0.002 / 0.087)**2 + (0.1 / period)**2)
+            AB_C = np.sqrt(AB**2 + 0.08**2)
             lumin_err[i] = intr_lumin[i] * (np.log(10) * AB_C)
         elif 80 <= period <= 110:
             intr_lumin[i] = 10**(-0.087 * period + 34.35)
-            AB = 0.087 * period * np.sqrt((0.017 / 0.087)**2 + (0.1 / period)**2)
-            AB_C = np.sqrt(AB**2 + 1.67**2)
+            AB = 0.087 * period * np.sqrt((0.001 / 0.087)**2 + (0.1 / period)**2)
+            AB_C = np.sqrt(AB**2 + 0.06**2)
             lumin_err[i] = intr_lumin[i] * (np.log(10) * AB_C)
             
     # now to finally compare intr_lumin against the fluxes to obtain distances
@@ -1973,7 +1973,7 @@ for num, name in enumerate(GalaxyNames): # iterate over the identified galaxies
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2020,7 +2020,7 @@ distance_data['PL_unc'] = PL_unc</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2125,7 +2125,7 @@ class="
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2261,7 +2261,7 @@ class="
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2304,7 +2304,7 @@ distance_data</div>
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 
 
 
@@ -2339,7 +2339,7 @@ distance_data</div>
       <th>0</th>
       <td>X000.7-Y065.4-N610</td>
       <td>23166.527455</td>
-      <td>4.566727e+05</td>
+      <td>19449.126986</td>
       <td>27581.906457</td>
       <td>35.736754</td>
     </tr>
@@ -2347,7 +2347,7 @@ distance_data</div>
       <th>1</th>
       <td>X001.3-Y063.9-N1640</td>
       <td>14820.848927</td>
-      <td>7.947834e+04</td>
+      <td>3695.503081</td>
       <td>6415.994075</td>
       <td>8.312943</td>
     </tr>
@@ -2355,7 +2355,7 @@ distance_data</div>
       <th>2</th>
       <td>X002.2-Y076.6-N613</td>
       <td>6800.865201</td>
-      <td>1.373268e+04</td>
+      <td>650.921293</td>
       <td>7548.523170</td>
       <td>9.780314</td>
     </tr>
@@ -2363,7 +2363,7 @@ distance_data</div>
       <th>3</th>
       <td>X002.4-Y065.4-N781</td>
       <td>23709.239488</td>
-      <td>1.235480e+05</td>
+      <td>5975.887750</td>
       <td>24263.992024</td>
       <td>31.437868</td>
     </tr>
@@ -2371,7 +2371,7 @@ distance_data</div>
       <th>4</th>
       <td>X002.6-Y057.3-N842</td>
       <td>7480.182488</td>
-      <td>1.654507e+04</td>
+      <td>790.226449</td>
       <td>7680.245139</td>
       <td>9.950981</td>
     </tr>
@@ -2387,7 +2387,7 @@ distance_data</div>
       <th>388</th>
       <td>X354.8-Y077.7-N708</td>
       <td>19100.066343</td>
-      <td>6.462214e+04</td>
+      <td>2976.781075</td>
       <td>23443.469776</td>
       <td>30.374750</td>
     </tr>
@@ -2395,7 +2395,7 @@ distance_data</div>
       <th>389</th>
       <td>X355.3-Y074.1-N915</td>
       <td>7200.860679</td>
-      <td>1.029703e+07</td>
+      <td>426632.290482</td>
       <td>7583.454052</td>
       <td>9.825573</td>
     </tr>
@@ -2403,7 +2403,7 @@ distance_data</div>
       <th>390</th>
       <td>X355.9-Y077.4-N898</td>
       <td>5584.375784</td>
-      <td>1.221736e+04</td>
+      <td>567.988176</td>
       <td>5820.374044</td>
       <td>7.541222</td>
     </tr>
@@ -2411,7 +2411,7 @@ distance_data</div>
       <th>391</th>
       <td>X356.2-Y076.6-N842</td>
       <td>18124.891216</td>
-      <td>4.432036e+04</td>
+      <td>2092.807586</td>
       <td>19255.655329</td>
       <td>24.948769</td>
     </tr>
@@ -2419,7 +2419,7 @@ distance_data</div>
       <th>392</th>
       <td>X356.7-Y081.1-N656</td>
       <td>17509.515881</td>
-      <td>3.960544e+04</td>
+      <td>1830.320686</td>
       <td>17060.299002</td>
       <td>22.104336</td>
     </tr>
@@ -2508,13 +2508,13 @@ distance_data</div>
       
       
         
-        <a href="../../../About/" class="md-footer__link md-footer__link--next" aria-label="Next: About" rel="next">
+        <a href="../Distance%20Ladder%20II%3B%20X-Ray%20Flashes%20and%20Distant%20Galaxies/" class="md-footer__link md-footer__link--next" aria-label="Next: Distance Ladder II" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              About
+              Distance Ladder II
             </div>
           </div>
           <div class="md-footer__button md-icon">
