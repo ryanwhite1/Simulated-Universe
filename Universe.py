@@ -444,11 +444,11 @@ class Universe(object):
             peaklumin = 2 * 10**36  # 20 billion times solar luminosity, source: https://www.sciencedirect.com/topics/physics-and-astronomy/type-ia-supernovae#:~:text=A%20typical%20supernova%20reaches%20its,times%20that%20of%20the%20Sun.
             peakfluxes = (peaklumin / (4 * np.pi * distances**2)) * np.random.normal(1, 0.01, frequency)  # F = L / (4pi*r^2)  - with some random scatter
         elif event == "flash":
-            min_photons = 300
+            min_photons = 220 # we want the most distant photon counts to be on order 180
             intrinsic_lumin = min_photons * 4 * np.pi * (self.radius * 3.086 * 10**16)**2
-            peakfluxes = (intrinsic_lumin / (4 * np.pi * np.square(distances))) * np.random.normal(1, 0.01, frequency)
-            peakfluxes = np.around(peakfluxes, 0)
-            peakfluxes = peakfluxes.astype('int32')
+            peakfluxes = (intrinsic_lumin / (4 * np.pi * np.square(distances))) # calculate what we'd expect the photon counts to be
+            peakfluxes = peakfluxes.astype('int64') # photons need to be discrete (fight me quantum physicists)
+            peakfluxes = np.random.poisson(lam=peakfluxes, size=frequency) # want poisson data with lamba of the expected lumin
         else:
             raise ValueError(f"Need a valid supernova/event type. Type of {event} is not valid.")
             
