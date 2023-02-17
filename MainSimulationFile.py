@@ -416,7 +416,7 @@ class UniverseSim(object):
             return fig
         
             
-    def save_data(self, properties=True, proj='AllSky', pic=True, pretty=True, planetNeb=False, radio=True, stars=True, 
+    def save_data(self, properties=True, proj='Cube', pic=True, pretty=True, planetNeb=False, radio=False, stars=True, 
                   variablestars=True, blackbodies=False, distantgalax=True, flashes=True, doppler=[False, False], blackhole=False, 
                   rotcurves=False, cutoff=[True, 1e-22], site=True, archive=True):
         ''' Generates some data, takes other data, and saves it to the system in a new directory within the file directory.
@@ -1129,8 +1129,8 @@ def main():
     # sim = UniverseSim(1000, mode="Normal")
     # sim.save_data()
     
-    # sim = UniverseSim(800, seed=2639, isotropic=False, rotvels="Boosted", mode="Comprehensive")
-    # sim.save_data(proj="Both", planetNeb=False, radio=True)
+    sim = UniverseSim(800)
+    sim.save_data()
     
     # sim = UniverseSim(800, seed=1000, isotropic=False, homogeneous=False, blackholes=False, darkmatter=True)
     # sim.save_data(proj="Cube", radio=False, rotcurves=True)
@@ -1138,12 +1138,12 @@ def main():
     # sim = UniverseSim(800, seed=9999, isotropic=True, homogeneous=True, blackholes=True, darkmatter=False)
     # sim.save_data(proj="Cube", radio=False, rotcurves=True)
     
-    for numclust in [400, 800]:
-        for proj in ["Cube", "DivCube"]:
-            for pretty in [True, False]:
-                print(numclust, proj, pretty)
-                sim = UniverseSim(numclust, seed=3948)
-                sim.save_data(proj=proj, pretty=pretty, radio=False)
+    # for numclust in [400, 800]:
+    #     for proj in ["Cube", "DivCube"]:
+    #         for pretty in [True, False]:
+    #             print(numclust, proj, pretty)
+    #             sim = UniverseSim(numclust, seed=3948)
+    #             sim.save_data(proj=proj, pretty=pretty, radio=False)
     
 
     
