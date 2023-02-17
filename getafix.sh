@@ -15,4 +15,4 @@ which python
 cd /data/uqbpope/Simulated-Universe
 
 # Run your Python script
-python3 MainSimulationFile.py > simulation_output.txt
+python MainSimulationFile.py > simulation_output.txt
