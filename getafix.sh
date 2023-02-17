@@ -7,7 +7,7 @@
 
 # Load the necessary modules
 module load anaconda3/5.2.0
-mconda activate ladder
+conda activate ladder
 which python
 
 # Change to the directory where your Python script is located
