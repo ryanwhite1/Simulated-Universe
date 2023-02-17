@@ -14,4 +14,4 @@ conda activate ladder
 cd /data/uqbpope/Simulated-Universe
 
 # Run your Python script
-python MainSimulationFile.py > simulation_output.txt
+python3 MainSimulationFile.py > simulation_output.txt
