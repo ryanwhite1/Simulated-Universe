@@ -2,7 +2,7 @@
 #SBATCH --job-name=simulation
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=6
-#SBATCH --mem=16G
+#SBATCH --mem=32G
 #SBATCH --time=0-00:30:00
 
 # Load the necessary modules
