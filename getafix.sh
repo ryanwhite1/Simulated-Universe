@@ -7,7 +7,6 @@
 
 # Load the necessary modules
 module load anaconda3/5.2.0
-conda init bash
 conda activate ladder
 
 # Change to the directory where your Python script is located
