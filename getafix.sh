@@ -7,7 +7,8 @@
 
 # Load the necessary modules
 module load anaconda3/5.2.0
-conda activate ladder
+mconda activate ladder
+which python
 
 # Change to the directory where your Python script is located
 cd /data/uqbpope/Simulated-Universe
