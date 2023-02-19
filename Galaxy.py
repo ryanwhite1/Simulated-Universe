@@ -23,7 +23,7 @@ class Galaxy(object):
     '''
     def __init__(self, species, position, cartesian=False, blackhole=True, darkmatter=True, rotate=True, complexity="Normal",
                  variable=[True, [24.6, "Tri", -6.5, 59], [40.7, "Saw", -14, 64], [75.6, "Sine", 17.9, 35.1]],
-                 rotvels="Normal"):
+                 rotvels="Boosted"):
         ''' A galaxy which hosts hundreds to thousands of randomly generated Star objects, potentially with a BlackHole object 
         at its center. 
         Parameters
@@ -74,7 +74,13 @@ class Galaxy(object):
                           self.starpositions[2] - self.cartesian[2]]
         self.starorbits = self.star_orbits(starorbitradii[0], starorbitradii[1], starorbitradii[2])
         self.starvels, _, self.darkmattermass, self.directions = self.rotation_vels(mult=rotvels)
-        self.galaxymass = sum(self.starmasses) + self.darkmattermass
+        if rotvels == "Boosted":
+            # we need to account for the factors applied in self.rotation_vels()
+            self.galaxymass = 10 * sum(self.starmasses) + self.darkmattermass + 4 * self.blackhole.mass
+            self.galaxyBHmass = 4 * self.blackhole.mass if self.blackhole != False else 0
+        elif rotvels == "Normal":
+            self.galaxymass = sum(self.starmasses) + self.darkmattermass + self.blackhole.mass
+            self.galaxyBHmass = self.blackhole.mass if self.blackhole != False else 0
     
     def choose_blackhole(self):
         ''' Chooses whether to have a black hole in this galaxy (only if the complexity is "Comprehensive")

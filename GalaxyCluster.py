@@ -61,7 +61,12 @@ class GalaxyCluster(object):
         self.variable = variable
         self.rotvelMult = rotvels
         self.galaxies, self.galaxmasses, self.galaxorbits, self.galaxpositions = self.generate_galaxies(population)
-        self.galaxvels, self.ObsGalaxVels, self.directions = self.rotation_vels(mult=self.rotvelMult)
+        self.galaxvels, self.ObsGalaxVels, self.darkmattermass, self.directions = self.rotation_vels(mult=self.rotvelMult)
+        
+        if rotvels == "Boosted":
+            self.clustermass = 4 * sum(self.galaxmasses) + self.darkmattermass
+        elif rotvels == "Normal":
+            self.clustermass = sum(self.galaxmasses) + self.darkmattermass
     
     def generate_galaxy(self, species, position, local):
         ''' Generate a Galaxy class object.
@@ -216,6 +221,8 @@ class GalaxyCluster(object):
             if self.darkmatter == False, then darkvel=vel
         VelObsArray : np.array
             Same format as velarray, but is the line-of-sight (radial) velocities as seen by the observer at the origin
+        darkmattermass : float
+            The mass of dark matter in 1.5x the cluster radius (maximum dist of a galaxy from the cluster center). Units are solar masses
         direction : numpy array
             The directions (as proportions of velocity magnitude in each cartesian coordinate axis) of galaxy motion
         '''
@@ -246,6 +253,9 @@ class GalaxyCluster(object):
                 darkvel[i] = (np.sqrt(G * M / R) / 1000)    # newtonian approximation, now including dark matter
             else:
                 darkvel[i] = vel[i]
+                
+        darkmattermass = darkMass(1.5 * max(MassRadii[:, 1])) if self.darkmatter == True else 0
+        darkmattermass /= 1.988 * 10**30    # get the darkmatter mass in units of solar masses
         
         velarray = np.array([vel, darkvel]) * np.random.normal(1, 0.01, len(vel))
 
@@ -278,7 +288,7 @@ class GalaxyCluster(object):
             # the dot product above gets the radial component of the velocity (thank you Ciaran!! - linear algebra is hard)
 
         VelObsArray = velarray * velprops   # multiply the actual velocities by the line of sight proportion of the velocity magnitude
-        return velarray, VelObsArray, direction
+        return velarray, VelObsArray, darkmattermass, direction
     
     def plot_RotCurve(self, newtapprox=False, observed=False, save=False):
         ''' Produces a rotation curve of this galaxy. If the galaxy has dark matter and the user opts to display the newtonian

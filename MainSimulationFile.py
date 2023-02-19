@@ -48,7 +48,7 @@ class UniverseSim(object):
     that should be interacted with by the user. 
     '''
     def __init__(self, numclusters, hubble=None, seed=None, blackholes=True, darkmatter=True, mode="Normal",
-                 homogeneous=False, isotropic=True, rotvels="Boosted", event="flash"):
+                 homogeneous=True, isotropic=True, rotvels="Boosted", event="flash"):
         ''' Generates a Universe object and imports important data from it. 
         Parameters
         ----------
@@ -418,7 +418,7 @@ class UniverseSim(object):
             
     def save_data(self, properties=True, proj='Cube', pic=True, pretty=True, planetNeb=False, radio=False, stars=True, 
                   variablestars=True, blackbodies=False, distantgalax=True, flashes=True, doppler=[False, False], blackhole=False, 
-                  rotcurves=False, cutoff=[True, 1e-22], site=True, archive=True):
+                  rotcurves=False, cutoff=[True, 1e-20], site=True, archive=True):
         ''' Generates some data, takes other data, and saves it to the system in a new directory within the file directory.
         .pdf images are commented out currently - uncomment them at your own risk! (.pdfs can be in excess of 90mb each!)
         Parameters
@@ -484,6 +484,7 @@ class UniverseSim(object):
         # now we can save the data that will help check answers, etc
         if properties:
             self.save_properties()
+            self.save_galax_properties(proj=proj)
         if blackbodies:     # plot and save blackbody curves for stars of a given temperature in the local galaxy
             self.save_blackbodies()
         if True in doppler:  # save the doppler image with a log scale
@@ -559,6 +560,64 @@ class UniverseSim(object):
         HR.savefig(self.datadirectory + '/Local Galaxy HR Diagram.png', dpi=600, bbox_inches='tight', pad_inches = 0.01)
         plt.close('all')
         proptime2 = time(); total = proptime2 - proptime1; print("Universe properties saved in", total, "s")
+        
+    def save_galax_properties(self, proj="Cube"):
+        ''' Saves two .txt files containing important properties about all of the resolved galaxies, and galaxy 
+        clusters (resolved and distant) respectively.
+        Parameters
+        ----------
+        proj : str
+            One of {'AllSky', 'Cube', 'Both', 'DivCube'} depending on if you want a single, equirectangular projected image of the sky, 
+            or six, cubemapped images of the sky, respectively. (or both!)
+        '''
+        if not self.datadirectory:
+            self.create_directory()
+        
+        # first, save a file with all galaxy data (with formatted values)
+        with open(self.datadirectory + "/Galaxy_Details.txt", "w") as galax:
+            if proj in ["Cube", "DivCube", "Both"]:
+                directions = np.array(["Front", "Back", "Top", "Bottom", "Left", "Right"])
+                galax.write("Face X Y Equat Polar Type Distance(pc) Radius(pc) NumStars Mass(Mo) BHMass(Mo)\n")
+                for galaxy in self.galaxies:
+                    x, y, z = galaxy.cartesian
+                    [uc], [vc], [index] = misc.cubemap(x, y, z)
+                    face = directions[index]
+                    equat, polar, dist = galaxy.spherical
+                    uc, vc = format(uc, '2.2f'), format(vc, '2.2f')
+                    equat, polar, dist = format(equat, '3.2f'), format(polar, '3.2f'), format(dist, '.0f')
+                    radius, mass, bhmass = format(galaxy.radius, '.0f'), format(galaxy.galaxymass, '.0f'), format(galaxy.galaxyBHmass, '.0f')
+                    galax.write(f"{face} {uc} {vc} {equat} {polar} {galaxy.species} {dist} {radius} {len(galaxy.stars)} {mass} {bhmass}\n")
+            else:
+                galax.write("Equat Polar Type Distance(pc) Radius(pc) NumStars Mass(Mo) BHMass(Mo)\n")
+                for galaxy in self.galaxies:
+                    equat, polar, dist = galaxy.spherical
+                    equat, polar, dist = format(equat, '3.2f'), format(polar, '3.2f'), format(dist, '.0f')
+                    radius, mass, bhmass = format(galaxy.radius, '.0f'), format(galaxy.galaxymass, '.0f'), format(galaxy.galaxyBHmass, '.0f')
+                    galax.write(f"{equat} {polar} {galaxy.species} {dist} {radius} {len(galaxy.stars)} {mass} {bhmass}\n")
+                    
+        # now save a file with all cluster data (formatted values)
+        with open(self.datadirectory + "/Cluster_Details.txt", "w") as clust:
+            if proj in ["Cube", "DivCube", "Both"]:
+                directions = np.array(["Front", "Back", "Top", "Bottom", "Left", "Right"])
+                clust.write("Face X Y Equat Polar NumGalax Distance(pc) Radius(pc) Mass(Mo)\n")
+                for cluster in self.universe.clusters:
+                    x, y, z = cluster.cartesian
+                    [uc], [vc], [index] = misc.cubemap(x, y, z)
+                    face = directions[index]
+                    equat, polar, dist = cluster.spherical
+                    uc, vc = format(uc, '2.2f'), format(vc, '2.2f')
+                    equat, polar, dist = format(equat, '3.2f'), format(polar, '3.2f'), format(dist, '.0f')
+                    radius, mass = format(cluster.radius, '.0f'), format(cluster.clustermass, '.0f')
+                    clust.write(f"{face} {uc} {vc} {equat} {polar} {cluster.clusterpop} {dist} {radius} {mass}\n")
+            else:
+                clust.write("Equat Polar NumGalax Distance(pc) Radius(pc) Mass(Mo)\n")
+                for cluster in self.universe.clusters:
+                    equat, polar, dist = cluster.spherical
+                    equat, polar, dist = format(equat, '3.2f'), format(polar, '3.2f'), format(dist, '.0f')
+                    radius, mass = format(cluster.radius, '.0f'), format(cluster.clustermass, '.0f')
+                    clust.write(f"{equat} {polar} {cluster.clusterpop} {dist} {radius} {mass}\n")
+            
+            
         
     def save_pic(self, radio=False, proj='AllSky', pretty=True, planetNeb=False):
         ''' Saves the universe picture(s) in the directory of choice, given desired projection and radio contours.
@@ -1129,7 +1188,7 @@ def main():
     # sim = UniverseSim(1000, mode="Normal")
     # sim.save_data()
     
-    sim = UniverseSim(800)
+    sim = UniverseSim(200)
     sim.save_data()
     
     # sim = UniverseSim(800, seed=1000, isotropic=False, homogeneous=False, blackholes=False, darkmatter=True)

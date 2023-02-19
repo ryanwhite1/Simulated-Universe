@@ -207,20 +207,31 @@ class Universe(object):
         
         lowerbound = 5000      # we want a certain area around the origin to be empty (to make space for the local cluster)
         if self.homogeneous:
+            # we want to generate close clusters and distance clusters separately, otherwise, for a perfectly homogeneous
+            # universe, we would usually have *no* resolved, close galaxies. 
+            # the trend follows an almost cubic function, but curves down at high distance from magnitude cutoff
+            #            |                    __
+            #            |                  _/  \_
+            # frequency  |              ___/      \
+            #            |  |    ______/           \
+            #            |/\|___/___________________|__
+            #               |         distance (kpc)
+            #               ^ threshold (usually 30kpc)
             closepopulation = int(np.sqrt(self.clusterpop))
+            # generate uniform RVs between the lowerbound and threshold, cubed
             closedists = np.random.uniform((lowerbound / self.radius)**3, (threshold / self.radius)**3, closepopulation)
-            fardists = np.random.uniform((lowerbound / self.radius)**3, 1, population - closepopulation)
+            # generate uniform RVs between the threshold and the universe radius, cubed
+            fardists = np.random.uniform((threshold / self.radius)**3, 1, population - closepopulation)
             dists = np.append(closedists, fardists)
-            R = self.radius * np.cbrt(dists)
+            R = self.radius * np.cbrt(dists) # now calculate their distances in pc
+            
+            # to emulate magnitude cutoffs for 'dim' galaxies, we want to reduce the number of really distant galaxies
+            rvs = np.random.uniform((threshold / self.radius)**3, 1, self.clusterpop)
+            for i, dist in enumerate(R):
+                if (dist / self.radius)**3 > rvs[i]: # if our galaxy is far away
+                    # give it a new distance which won't be as far
+                    R[i] = self.radius * np.cbrt(np.random.uniform((threshold / self.radius)**3, (0.85)**3))
         else:
-            # proportion = 1/10    # proportion of total galaxies that you want to be resolved, 
-            # # cdf of the exponential distribution is F(x) = 1 - exp(- x / b), where b is the 'scale', or mean, which goes into the numpy exponential function
-            # # rearranging this, for some prop 'p', we get b = -x / ln(1 - p), and so
-            # mean = - threshold / np.log(1 - proportion)
-            # mean = mean / self.radius       # get the mean as a proportion of total radius
-            # dists = np.random.exponential(mean, population) + lowerbound / self.radius
-            # R = self.radius * dists
-                
             ### -- experimental: truncated exponential distribution for galaxy clusters in the universe -- ###
             # in its current state, the clusters are distributed according to two exponential distributions:
             #            |close    |_        distant            the left distribution makes up close clusters, and 
@@ -444,7 +455,7 @@ class Universe(object):
             peaklumin = 2 * 10**36  # 20 billion times solar luminosity, source: https://www.sciencedirect.com/topics/physics-and-astronomy/type-ia-supernovae#:~:text=A%20typical%20supernova%20reaches%20its,times%20that%20of%20the%20Sun.
             peakfluxes = (peaklumin / (4 * np.pi * distances**2)) * np.random.normal(1, 0.01, frequency)  # F = L / (4pi*r^2)  - with some random scatter
         elif event == "flash":
-            min_photons = 220 # we want the most distant photon counts to be on order 180
+            min_photons = 250 # we want the most distant photon counts to be similar to, but above ~180
             intrinsic_lumin = min_photons * 4 * np.pi * (self.radius * 3.086 * 10**16)**2
             peakfluxes = (intrinsic_lumin / (4 * np.pi * np.square(distances))) # calculate what we'd expect the photon counts to be
             peakfluxes = peakfluxes.astype('int64') # photons need to be discrete (fight me quantum physicists)
