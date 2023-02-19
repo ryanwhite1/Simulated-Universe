@@ -517,7 +517,7 @@ class UniverseSim(object):
             
         proptime1 = time(); print("Writing universe properties...")
         # now to write the universe properties to a file. They're all pretty self-explanatory.
-        text = open(self.datadirectory + '/Universe Details.txt', "w")
+        text = open(self.datadirectory + '/Universe_Details.txt', "w")
         text.write("Universe Parameters: \n")
         text.write("Parameter                   | Value   \n")
         text.write("----------------------------|---------------------------------------\n")
@@ -550,14 +550,14 @@ class UniverseSim(object):
                 text.write(f"                            | {variable}\n")
                 
         text.close()
-        print('Universe properties saved to',self.datadirectory + '/Universe Details.txt')
+        print('Universe properties saved to', self.datadirectory + '/Universe_Details.txt')
         # plot and save the hubble diagram for the universe
         hubblediag = self.universe.plot_hubblediagram(save=True) 
-        hubblediag.savefig(self.datadirectory + '/Hubble Diagram.png', dpi=600, bbox_inches='tight', pad_inches = 0.01)
+        hubblediag.savefig(self.datadirectory + '/Hubble_Diagram.png', dpi=600, bbox_inches='tight', pad_inches = 0.01)
         # hubblediag.savefig(self.datadirectory + '/Hubble Diagram.pdf', dpi=600, bbox_inches='tight', pad_inches = 0.01)
         # now plot and save the HR diagram for the local galaxy
         HR = self.galaxies[-1].plot_HR(isoradii=True, xunit="both", yunit="BolLumMag", variable=True, save=True)
-        HR.savefig(self.datadirectory + '/Local Galaxy HR Diagram.png', dpi=600, bbox_inches='tight', pad_inches = 0.01)
+        HR.savefig(self.datadirectory + '/Local_Galaxy_HR Diagram.png', dpi=600, bbox_inches='tight', pad_inches = 0.01)
         plt.close('all')
         proptime2 = time(); total = proptime2 - proptime1; print("Universe properties saved in", total, "s")
         
@@ -748,9 +748,8 @@ class UniverseSim(object):
         if proj in ['AllSky', 'Both']:
             equat, polar, radius = misc.cartesian_to_spherical(x, y, z)
             
-        # generate parallax according to p = 1/d (pc) formula, with +/- 1 arcsecond of uncertainty
-        parallax = (1 / radius) + np.random.uniform(-0.001, 0.001, self.numstars)    
-        parallax = [angle if angle >= 0.001 else 0 for angle in parallax]
+        # generate parallax according to p = 1/d (pc) formula, with +/- 0.5 arcsecond of uncertainty (to keep within +/-2mas for objects with no inherent parallax)
+        parallax = (1 / radius) + np.random.normal(0, 0.0005, self.numstars)    
         parallax = np.around(parallax, decimals=3)
         
         # round position values to 4 decimal places which is about ~1/3 of an arcsecond (or rather 0.0001 degrees)
@@ -1196,7 +1195,7 @@ def main():
     # sim = UniverseSim(1000, mode="Normal")
     # sim.save_data()
     
-    sim = UniverseSim(200)
+    sim = UniverseSim(200, seed=6683)
     sim.save_data()
     
     # sim = UniverseSim(800, seed=1000, isotropic=False, homogeneous=False, blackholes=False, darkmatter=True)
