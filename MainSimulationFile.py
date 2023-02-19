@@ -550,7 +550,7 @@ class UniverseSim(object):
                 text.write(f"                            | {variable}\n")
                 
         text.close()
-        
+        print('Universe properties saved to',self.datadirectory + '/Universe Details.txt')
         # plot and save the hubble diagram for the universe
         hubblediag = self.universe.plot_hubblediagram(save=True) 
         hubblediag.savefig(self.datadirectory + '/Hubble Diagram.png', dpi=600, bbox_inches='tight', pad_inches = 0.01)
@@ -594,6 +594,7 @@ class UniverseSim(object):
                     equat, polar, dist = format(equat, '3.2f'), format(polar, '3.2f'), format(dist, '.0f')
                     radius, mass, bhmass = format(galaxy.radius, '.0f'), format(galaxy.galaxymass, '.0f'), format(galaxy.galaxyBHmass, '.0f')
                     galax.write(f"{equat} {polar} {galaxy.species} {dist} {radius} {len(galaxy.stars)} {mass} {bhmass}\n")
+        print('Galaxy properties saved to',self.datadirectory + "/Galaxy_Details.txt")
                     
         # now save a file with all cluster data (formatted values)
         with open(self.datadirectory + "/Cluster_Details.txt", "w") as clust:
@@ -616,7 +617,7 @@ class UniverseSim(object):
                     equat, polar, dist = format(equat, '3.2f'), format(polar, '3.2f'), format(dist, '.0f')
                     radius, mass = format(cluster.radius, '.0f'), format(cluster.clustermass, '.0f')
                     clust.write(f"{equat} {polar} {cluster.clusterpop} {dist} {radius} {mass}\n")
-            
+        print('Cluster properties saved to',self.datadirectory + "/Cluster_Details.txt")
             
         
     def save_pic(self, radio=False, proj='AllSky', pretty=True, planetNeb=False):
@@ -831,7 +832,7 @@ class UniverseSim(object):
                             starfile = pd.DataFrame(stardata)
                             
                             starfile.to_csv(self.datadirectory + f"/{direction}/{X}{Y}/Star_Data.csv", index=None, sep=',')    # and finally save the dataframe to the directory
-                    
+                            print('DivCube star data saved to',self.datadirectory + f"/{direction}/{X}{Y}/Star_Data.csv")
         if proj in ["AllSky", "Both"]:
             # now, write all star data to a pandas dataframe
             stardata = {'Name': names, 'Equatorial': equat, 'Polar': polar,        # units of the equat/polar are in degrees
@@ -841,7 +842,7 @@ class UniverseSim(object):
             starfile = pd.DataFrame(stardata)
             
             starfile.to_csv(self.datadirectory + "/All_Star_Data.csv", index=None, sep=',')    # and finally save the dataframe to the directory
-        
+            print('Star data saved to',self.datadirectory + "/All_Star_Data.csv")
         startime2 = time(); total = startime2 - startime1; print("Star Data saved in", total, "s")
         
     def save_distant_galaxies(self, proj='AllSky', evolution=True, cutoff=[True, 1e-22]):
@@ -921,7 +922,8 @@ class UniverseSim(object):
                               'BlueF': blueflux[index == i], 'GreenF': greenflux[index == i], 'RedF': redflux[index == i],
                               'Size': sizes[index == i], 'RadialVelocity': DGobsvel[index == i]}
                     DGfile = pd.DataFrame(DGdata)
-                    DGfile.to_csv(self.datadirectory + f"/{direction}/Distant_Galaxy_Data.csv", index=None, sep=',')
+                    fname = self.datadirectory + f"/{direction}/Distant_Galaxy_Data.csv"
+                    DGfile.to_csv(fname, index=None, sep=',')
                 elif proj == "DivCube":
                     for j, X in enumerate(["A", "B", "C", "D", "E", "F"]):
                         xbounds = [-45 + j * 15, -30 + j * 15]
@@ -934,8 +936,9 @@ class UniverseSim(object):
                                       'BlueF': blueflux[indices], 'GreenF': greenflux[indices], 'RedF': redflux[indices],
                                       'Size': sizes[indices], 'RadialVelocity': DGobsvel[indices]}    
                             DGfile = pd.DataFrame(DGdata)
-                            
-                            DGfile.to_csv(self.datadirectory + f"/{direction}/{X}{Y}/Distant_Galaxy_Data.csv", index=None, sep=',')    # and finally save the dataframe to the directory
+                            fname = self.datadirectory + f"/{direction}/{X}{Y}/Distant_Galaxy_Data.csv"
+                            DGfile.to_csv(fname, index=None, sep=',')    # and finally save the dataframe to the directory
+        print('Saved to',fname)
         distanttime2 = time(); total = distanttime2 - distanttime1; print("Distant galaxy data saved in", total, "s")
         
     def save_variables(self, cutoff=[True, 1e-22]):
@@ -975,8 +978,9 @@ class UniverseSim(object):
                         times, fluxes = star.lightcurve
                         variabledata = {"Time": times, "NormalisedFlux": fluxes}
                         variablefile = pd.DataFrame(variabledata)
-                        
-                        variablefile.to_csv(variabledirectory + f"/{direction}{starname}.csv", index=None, sep=',')
+                        fname = variabledirectory + f"/{direction}{starname}.csv"
+                        variablefile.to_csv(fname, index=None, sep=',')
+                        print('Saved to',fname)
                 k += 1
         
         # now to take and plot the period-luminosity data of the local galaxy!
@@ -1027,7 +1031,8 @@ class UniverseSim(object):
             elif self.eventType == "flash":
                 flashdata = {"Name": names, "Equatorial": equats, "Polar": polars, "Photon-Count": peak}
             flashfile = pd.DataFrame(flashdata)
-            flashfile.to_csv(self.datadirectory + "/AllSky_Flash Data.csv", index=None, sep=',')
+            fname
+            flashfile.to_csv(fname, index=None, sep=',')
         if proj in ["Cube", "Both", "DivCube"]:
             directions = np.array(['Front', 'Back', 'Top', 'Bottom', 'Left', 'Right'])
             if self.eventType == "supernova":
@@ -1035,8 +1040,9 @@ class UniverseSim(object):
             elif self.eventType == "flash":
                 flashdata = {"Name": names, "Direction": directions[index], "X": uc, "Y": vc, "Photon-Count": peak}
             flashfile = pd.DataFrame(flashdata)
-            flashfile.to_csv(self.datadirectory + "/Flash_Data.csv", index=None, sep=',')
-        
+            fname = self.datadirectory + "/Flash_Data.csv"
+            flashfile.to_csv(fname, index=None, sep=',')
+        print('Saved to',fname)
         supertime2 = time(); total = supertime2 - supertime1; print("Flash data saved in", total, "s")
     
     def save_blackbodies(self):
@@ -1092,7 +1098,8 @@ class UniverseSim(object):
             BHdata = {'Name': names, 'Equatorial': equats, 'Polar': polars,
                       'Luminosity': BHlumins}
             BHfile = pd.DataFrame(BHdata)
-            BHfile.to_csv(self.datadirectory + "/AllSky_Radio_Source_Data.csv", index=None, sep=',')
+            fname = self.datadirectory + "/AllSky_Radio_Source_Data.csv"
+            BHfile.to_csv(fname, index=None, sep=',')
         if proj in ["Cube", "Both", "DivCube"]:
             x, y, z = misc.spherical_to_cartesian(equats, polars, np.array(dists))
             uc, vc, index = misc.cubemap(x, y, z)
@@ -1102,8 +1109,9 @@ class UniverseSim(object):
             BHdata = {'Name': names, 'Direction': directions[index], 'X': uc, 'Y': vc,
                       'Luminosity': BHlumins}
             BHfile = pd.DataFrame(BHdata)
-            BHfile.to_csv(self.datadirectory + "/Radio_Source_Data.csv", index=None, sep=',')
-        
+            fname = self.datadirectory + "/Radio_Source_Data.csv"
+            BHfile.to_csv(fname, index=None, sep=',')
+        print('Saved to',fname)
         bhtime2 = time(); total = bhtime2 - bhtime1; print("Black hole data saved in", total, "s")
     
     def save_rotcurves(self):
