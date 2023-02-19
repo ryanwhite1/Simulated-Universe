@@ -241,8 +241,8 @@ class Universe(object):
             #            |_/_______|_____________\_____
             #                      |    distance (kpc)
             #                      ^threshold (usually 30kpc)
-            proportion = 2 / np.sqrt(self.clusterpop)    # proportion of total galaxies that you want to be resolved, 1/sqrt(n) gives a good, scaleable number.
-            closepop = int(proportion * self.clusterpop); farpop = int(self.clusterpop - closepop)  # find populations of each category
+            closepop = int(np.sqrt(self.clusterpop)) # proportion of total galaxies that you want to be resolved, sqrt(n) gives a good, scaleable number.
+            farpop = int(self.clusterpop - closepop)  # find populations of each category
             closescale = 2/5 * threshold    # the mean of the close distribution will actually be at about 3/5 of the threshold
             # now, define the close distribution using scipy truncated exponential dist. b is a form of the upper bound.
             # loc is the lower bound of the distribution and scale is the mean value after the lowerbound (i think?)
