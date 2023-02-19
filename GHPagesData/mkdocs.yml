@@ -55,6 +55,8 @@ plugins:
                 rendering:
                     show_source: false
         custom_templates: templates
+    - encryptcontent:   # https://pypi.org/project/mkdocs-encryptcontent-plugin/
+        global_password: 'di_her'
 
 markdown_extensions:
     - meta
