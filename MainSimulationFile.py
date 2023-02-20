@@ -22,6 +22,7 @@ from Nebula import Nebula
 from Universe import Universe
 from HTMLSite import Site
 
+from argparse import ArgumentParser
 
 def plot_all_dopplers(galaxies):
     ''' Plot the radial velocities of a list of Galaxy objects onto an image. Mainly to be used for troubleshooting.
@@ -103,7 +104,7 @@ class UniverseSim(object):
         '''
         # first, initialise the directory where all data will be saved
         self.directory = os.path.dirname(os.path.realpath(__file__))    # this is where this .py file is located on the system
-        subdirectory = f"/Datasets/Sim Data (Clusters; {self.universe.clusterpop}, Seed; {self.seed})"
+        subdirectory = f"/Datasets/universe_{self.seed}/"
         self.datadirectory = self.directory + subdirectory
         if os.path.exists(self.datadirectory):  # if this directory exists, we need to append a number to the end of it
             i = 1
@@ -1168,6 +1169,10 @@ class UniverseSim(object):
         t2 = time(); t = t2 - t1; print(f"Data archived in {t} s")
         
 def main():
+    ap = ArgumentParser(description='Generate realistic simulated universes for PHYS3080 at UQ')
+    ap.add_argument('-s', '--seed', metavar='S', type=int, help='Random Seed', default=6683)
+    ap.add_argument('-N', '--Ngal', metavar='N', type=int, help='Number of Galaxies', default=200)
+    args = ap.parse_args()
     ### -- this was used to find galaxy averages -- ###
     # number = 40
     # specieslist = ['S0', 'Sa', 'Sb', 'Sc', 'SBa', 'SBb', 'SBc', 'cD', 'E0', 'E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7']
@@ -1195,7 +1200,8 @@ def main():
     # sim = UniverseSim(1000, mode="Normal")
     # sim.save_data()
     
-    sim = UniverseSim(200, seed=6683)
+    # sim = UniverseSim(200, seed=6683)
+    sim = UniverseSim(args.Ngal, seed=args.seed)
     sim.save_data()
     
     # sim = UniverseSim(800, seed=1000, isotropic=False, homogeneous=False, blackholes=False, darkmatter=True)

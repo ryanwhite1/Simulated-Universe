@@ -64,7 +64,7 @@ class Star(object):
                 self.lightcurve = self.generate_variable(variable[3])
                 self.variable = True
                 self.variabletype = ["Longest", variable[3][1]]
-            elif noiseprob < 0.01:  # 1% chance of being random noise for its variable, provided that the other conditions arent met first
+            elif noiseprob < 0.001:  # 0.1% chance of being random noise for its variable, provided that the other conditions arent met first
                 self.lightcurve = self.generate_variable([np.random.uniform(3, 40), "Noise", -1, -1])
                 self.variable = True
                 self.variabletype = ["False", "Noise"]
