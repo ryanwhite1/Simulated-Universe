@@ -557,7 +557,7 @@ class UniverseSim(object):
         # hubblediag.savefig(self.datadirectory + '/Hubble Diagram.pdf', dpi=600, bbox_inches='tight', pad_inches = 0.01)
         # now plot and save the HR diagram for the local galaxy
         HR = self.galaxies[-1].plot_HR(isoradii=True, xunit="both", yunit="BolLumMag", variable=True, save=True)
-        HR.savefig(self.datadirectory + '/Local_Galaxy_HR Diagram.png', dpi=600, bbox_inches='tight', pad_inches = 0.01)
+        HR.savefig(self.datadirectory + '/Local_Galaxy_HR_Diagram.png', dpi=600, bbox_inches='tight', pad_inches = 0.01)
         plt.close('all')
         proptime2 = time(); total = proptime2 - proptime1; print("Universe properties saved in", total, "s")
         
@@ -594,7 +594,7 @@ class UniverseSim(object):
                     equat, polar, dist = format(equat, '3.2f'), format(polar, '3.2f'), format(dist, '.0f')
                     radius, mass, bhmass = format(galaxy.radius, '.0f'), format(galaxy.galaxymass, '.0f'), format(galaxy.galaxyBHmass, '.0f')
                     galax.write(f"{equat} {polar} {galaxy.species} {dist} {radius} {len(galaxy.stars)} {mass} {bhmass}\n")
-        print('Galaxy properties saved to',self.datadirectory + "/Galaxy_Details.txt")
+        print('Galaxy properties saved to', self.datadirectory + "/Galaxy_Details.txt")
                     
         # now save a file with all cluster data (formatted values)
         with open(self.datadirectory + "/Cluster_Details.txt", "w") as clust:
@@ -617,7 +617,7 @@ class UniverseSim(object):
                     equat, polar, dist = format(equat, '3.2f'), format(polar, '3.2f'), format(dist, '.0f')
                     radius, mass = format(cluster.radius, '.0f'), format(cluster.clustermass, '.0f')
                     clust.write(f"{equat} {polar} {cluster.clusterpop} {dist} {radius} {mass}\n")
-        print('Cluster properties saved to',self.datadirectory + "/Cluster_Details.txt")
+        print('Cluster properties saved to', self.datadirectory + "/Cluster_Details.txt")
             
         
     def save_pic(self, radio=False, proj='AllSky', pretty=True, planetNeb=False):
@@ -666,7 +666,7 @@ class UniverseSim(object):
                             ybounds = [45 - Y * 15, 60 - Y * 15] # calculate ybounds of this subdivision
                             ax.set_ylim(ybounds) # set ybounds
                             # now to save this particular subdivision image
-                            fig.savefig(self.datadirectory + f'/{directions[i]}/{X}{Y}/{X}{Y}-{directions[i]}.png', 
+                            fig.savefig(self.datadirectory + f'/{directions[i]}/{X}{Y}/{X}{Y}_{directions[i]}.png', 
                                         dpi=750, bbox_inches='tight', pad_inches = 0.01)
                             
                     # now to save a picture of the entire face, with grid lines indicating subdivisions
@@ -689,7 +689,7 @@ class UniverseSim(object):
             pictime1 = time(); print("Generating universe picture...") # start timer
             fig, ax = self.plot_universe(pretty=pretty, planetNeb=planetNeb, save=True)
             fig.set_size_inches(18, 9, forward=True)
-            fig.savefig(self.datadirectory + '/AllSky Universe Image.png', dpi=1500, bbox_inches='tight', 
+            fig.savefig(self.datadirectory + '/AllSky_Universe_Image.png', dpi=1500, bbox_inches='tight', 
                         pad_inches = 0.01)
             pictime2 = time(); total = pictime2 - pictime1; print("AllSky Universe picture saved in", total, "s")
         
@@ -697,7 +697,7 @@ class UniverseSim(object):
             print("Generating radio overlay...")
             if proj in ["AllSky", "Both"]:
                 self.plot_radio([fig, ax], method="AllSky")
-                fig.savefig(self.datadirectory + '/AllSky Radio Overlay Image.png', dpi=1500, bbox_inches='tight', 
+                fig.savefig(self.datadirectory + '/AllSky_Radio_Overlay_Image.png', dpi=1500, bbox_inches='tight', 
                             pad_inches = 0.01)
                 pictime3 = time(); total = pictime3 - pictime2; print("Radio overlay picture saved in", total, "s")
             if proj in ["Cube", "Both", "DivCube"]:
@@ -705,7 +705,7 @@ class UniverseSim(object):
                 for i in range(6):
                     fig, ax = figAxes[i]
                     ax.set_xlim(-45, 45); ax.set_ylim(-45, 45);
-                    fig.savefig(self.datadirectory + f'/{directions[i]}/{directions[i]} Radio Overlay.png', dpi=1500, 
+                    fig.savefig(self.datadirectory + f'/{directions[i]}/{directions[i]}_Radio_Overlay.png', dpi=1500, 
                                 bbox_inches='tight', pad_inches = 0.01)
                     if proj == 'DivCube':
                         for j, X in enumerate(["A", "B", "C", "D", "E", "F"]):
@@ -714,7 +714,7 @@ class UniverseSim(object):
                             for Y in range(1, 7):
                                 ybounds = [45 - Y * 15, 60 - Y * 15]
                                 ax.set_ylim(ybounds)
-                                fig.savefig(self.datadirectory + f'/{directions[i]}/{X}{Y}/{X}{Y}-{directions[i]} Radio Overlay.png',
+                                fig.savefig(self.datadirectory + f'/{directions[i]}/{X}{Y}/{X}{Y}_{directions[i]}_Radio_Overlay.png',
                                             dpi=150, bbox_inches='tight', pad_inches = 0.01)
             
         plt.close('all')
@@ -937,7 +937,7 @@ class UniverseSim(object):
                             DGfile = pd.DataFrame(DGdata)
                             fname = self.datadirectory + f"/{direction}/{X}{Y}/Distant_Galaxy_Data.csv"
                             DGfile.to_csv(fname, index=None, sep=',')    # and finally save the dataframe to the directory
-        print('Saved to',fname)
+        print('Saved to', fname)
         distanttime2 = time(); total = distanttime2 - distanttime1; print("Distant galaxy data saved in", total, "s")
         
     def save_variables(self, cutoff=[True, 1e-22]):
@@ -979,7 +979,7 @@ class UniverseSim(object):
                         variablefile = pd.DataFrame(variabledata)
                         fname = variabledirectory + f"/{direction}{starname}.csv"
                         variablefile.to_csv(fname, index=None, sep=',')
-                        print('Saved to',fname)
+                        print('Saved to', fname)
                 k += 1
         
         # now to take and plot the period-luminosity data of the local galaxy!
@@ -993,7 +993,7 @@ class UniverseSim(object):
         ax.set_yscale('log'); ax.set_xlim(xmin=0)
         ax.set_xlabel("Period (hours)"); ax.set_ylabel(r"Log Luminosity ($L / L_\odot$)")
         plt.close()
-        fig.savefig(self.datadirectory + '/Period-Luminosity Data.png', dpi=400, bbox_inches='tight', pad_inches = 0.01)
+        fig.savefig(self.datadirectory + '/Period_Luminosity_Data.png', dpi=400, bbox_inches='tight', pad_inches = 0.01)
         
         vartime2 = time(); total = vartime2 - vartime1; print("Variable data saved in", total, "s")
     
@@ -1030,7 +1030,7 @@ class UniverseSim(object):
             elif self.eventType == "flash":
                 flashdata = {"Name": names, "Equatorial": equats, "Polar": polars, "Photon-Count": peak}
             flashfile = pd.DataFrame(flashdata)
-            fname
+            fname = self.datadirectory + "/AllSky_Flash_Data.csv"
             flashfile.to_csv(fname, index=None, sep=',')
         if proj in ["Cube", "Both", "DivCube"]:
             directions = np.array(['Front', 'Back', 'Top', 'Bottom', 'Left', 'Right'])
@@ -1041,14 +1041,14 @@ class UniverseSim(object):
             flashfile = pd.DataFrame(flashdata)
             fname = self.datadirectory + "/Flash_Data.csv"
             flashfile.to_csv(fname, index=None, sep=',')
-        print('Saved to',fname)
+        print('Saved to', fname)
         supertime2 = time(); total = supertime2 - supertime1; print("Flash data saved in", total, "s")
     
     def save_blackbodies(self):
         ''' Saves blackbody curves for all stars in the local galaxy. 
         '''
         blacktime1 = time(); print("Generating blackbody curves for local galaxy...")
-        blackbodydirectory = self.datadirectory + "/Local Galaxy Blackbody Curves"     # save data within a subfolder
+        blackbodydirectory = self.datadirectory + "/Local_Galaxy_Blackbody_Curves"     # save data within a subfolder
         os.makedirs(blackbodydirectory)
         k = 0
         blackbodytemps = np.arange(0, 50)     # we only want two curves for each 1000K temps, so these are the temps/500
@@ -1117,7 +1117,7 @@ class UniverseSim(object):
         ''' Save rotation curves for all of the galaxies and clusters in the universe, each in their own file. 
         '''
         rottime1 = time(); print("Saving galaxy rotation curves...")
-        rotcurvedirectory = self.datadirectory + "/Galaxy Rotation Curves"
+        rotcurvedirectory = self.datadirectory + "/Galaxy_Rotation_Curves"
         os.makedirs(rotcurvedirectory)  # make a new folder to hold the rotation curves
         
         for galaxy in self.galaxies:
@@ -1125,19 +1125,19 @@ class UniverseSim(object):
             bh = "1" if galaxy.blackhole != False else "0"
             dm = "1" if galaxy.darkmatter == True else "0"
             fig = galaxy.plot_RotCurve(newtapprox=True, save=True)
-            fig.savefig(rotcurvedirectory + f'/E{equat}-P{polar} {galaxy.species}, BH{bh}, DM{dm}.png', 
+            fig.savefig(rotcurvedirectory + f'/E{equat}_P{polar}_{galaxy.species}_BH{bh}_DM{dm}.png', 
                         dpi=200, bbox_inches='tight', pad_inches = 0.01)
         rottime2 = time(); total = rottime2 - rottime1; print("Galaxy rotation curves saved in", total, "s")
         
         print("Saving cluster rotation curves...")
-        clustercurvedirectory = self.datadirectory + "/Cluster Rotation Curves"
+        clustercurvedirectory = self.datadirectory + "/Cluster_Rotation_Curves"
         os.makedirs(clustercurvedirectory)
         for cluster in self.universe.clusters:
             pop = cluster.clusterpop
             if pop >= 10 and cluster.complexity != "Distant":
                 equat, polar, _ = cluster.spherical; equat, polar = round(equat, 2), round(polar, 2)
                 fig = cluster.plot_RotCurve(newtapprox=True, save=True)
-                fig.savefig(clustercurvedirectory + f'/E{equat}-P{polar}, Pop;{pop}.png', 
+                fig.savefig(clustercurvedirectory + f'/E{equat}_P{polar}_Pop;{pop}.png', 
                             dpi=400, bbox_inches='tight', pad_inches = 0.01)
         plt.close('all')
         rottime3 = time(); total = rottime3 - rottime2; print("Cluster rotation curves saved in", total, "s")

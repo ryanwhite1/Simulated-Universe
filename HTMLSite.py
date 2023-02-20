@@ -96,8 +96,12 @@ class Site(object):
                     index.write("Positions are given by where they would appear in the relevant wide-field camera image. ")
                 index.write("Positions are only accurate to 0.05 degrees (one standard deviation). <p>")
                 index.write("The X-Ray camera is sensitive to burts of more than 174 photons only. <p>")
-                index.write('<H3><A HREF="Flash_Data.csv">Text file of the below data</A></H3>')
-                index.write(self.create_html_table(self.directory + "/Flash_Data.csv"))
+                if self.proj in ["AllSky", "Both"]:
+                    index.write('<H3><A HREF="AllSky_Flash_Data.csv">Text file of the below data</A></H3>')
+                    index.write(self.create_html_table(self.directory + "/AllSky_Flash_Data.csv"))
+                elif self.proj in ["Cube", "DivCube"]:
+                    index.write('<H3><A HREF="Flash_Data.csv">Text file of the below data</A></H3>')
+                    index.write(self.create_html_table(self.directory + "/Flash_Data.csv"))
                 
             index.write("</body>")
             
@@ -139,7 +143,7 @@ class Site(object):
                                 index.write(f'<A HREF="{X+Y}/index.html"> {X+Y}</A>')
                                 with open(self.directory + f"/{direction}/{X+Y}/index.html", "w") as subindex:
                                     subindex.write(f'<html>\n<head>\n<title>Data from the {direction} Wide-Field Camera, Division {X+Y} </title>\n</head>')
-                                    subindex.write(f'<body>\n<IMG SRC="{X}{Y}-{direction}.png"><br><hr>')
+                                    subindex.write(f'<body>\n<IMG SRC="{X}{Y}_{direction}.png"><br><hr>')
                                     
                                     subindex.write("<H2> Stellar Objects in this image </H2>")
                                     subindex.write("<p><b>Note:</b> positive radial velocities indicated objects moving away from us.</p>")
