@@ -1219,11 +1219,11 @@ def main():
     
     # sim = UniverseSim(200, seed=6683)
 
-    if args.seed < 4:
+    if args.seed < 8:
         blackholes =  True
     else:
         blackholes = False
-    if args.seed > 7:
+    if args.seed > 5:
         darkmatter=True 
     else:
         darkmatter = False
