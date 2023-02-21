@@ -76,10 +76,16 @@ class Galaxy(object):
         self.starvels, _, self.darkmattermass, self.directions = self.rotation_vels(mult=rotvels)
         if rotvels == "Boosted":
             # we need to account for the factors applied in self.rotation_vels()
-            self.galaxymass = 10 * sum(self.starmasses) + self.darkmattermass + 4 * self.blackhole.mass
+            if self.blackhole != False:
+                self.galaxymass = 10 * sum(self.starmasses) + self.darkmattermass + 4 * self.blackhole.mass
+            else:
+                self.galaxymass = 10 * sum(self.starmasses) + self.darkmattermass
             self.galaxyBHmass = 4 * self.blackhole.mass if self.blackhole != False else 0
         elif rotvels == "Normal":
-            self.galaxymass = sum(self.starmasses) + self.darkmattermass + self.blackhole.mass
+            if self.blackhole != False:
+                self.galaxymass = sum(self.starmasses) + self.darkmattermass + self.blackhole.mass
+            else:
+                self.galaxymass = sum(self.starmasses) + self.darkmattermass
             self.galaxyBHmass = self.blackhole.mass if self.blackhole != False else 0
     
     def choose_blackhole(self):

@@ -1190,34 +1190,6 @@ def main():
     ap.add_argument('-s', '--seed', metavar='S', type=int, help='Random Seed', default=6683)
     ap.add_argument('-N', '--Ngal', metavar='N', type=int, help='Number of Galaxies', default=200)
     args = ap.parse_args()
-    ### -- this was used to find galaxy averages -- ###
-    # number = 40
-    # specieslist = ['S0', 'Sa', 'Sb', 'Sc', 'SBa', 'SBb', 'SBc', 'cD', 'E0', 'E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7']
-    # for species in specieslist:
-    #     galaxies = []
-    #     for i in tqdm(range(number)):
-    #         galaxies.append(Galaxy(species, (0, 0, 0)))
-    #     # galaxies = [Galaxy(species, (0, 0, 0)) for i in range(number)]
-    #     masses = [galaxy.galaxymass for galaxy in galaxies]
-    #     radii = [galaxy.radius for galaxy in galaxies]
-    #     bluef = []; greenf = []; redf = []
-    #     for galaxy in galaxies:
-    #         for star in galaxy.stars:
-    #             bluef.append(star.bandlumin[0])
-    #             greenf.append(star.bandlumin[1])
-    #             redf.append(star.bandlumin[2])
-    #     meanbluef, meangreenf, meanredf = np.mean(bluef), np.mean(greenf), np.mean(redf)
-    #     sdbluef, sdgreenf, sdredf = np.std(bluef), np.std(greenf), np.std(redf)
-    #     print(f"Galaxy Mass for {number} {species} galaxies: Mean =", np.mean(masses), "with SD =", np.std(masses))
-    #     print(f"Galaxy Radius for {number} {species} galaxies: Mean =", np.mean(radii), "with SD =", np.std(radii))
-    #     print(f"Galaxy bandlumin for {number} {species} galaxies: Mean =", [meanbluef, meangreenf, meanredf], 
-    #           "with SD =", [sdbluef, sdgreenf, sdredf])
-    
-    ### -- this is the function that you should run! -- ###
-    # sim = UniverseSim(1000, mode="Normal")
-    # sim.save_data()
-    
-    # sim = UniverseSim(200, seed=6683)
 
     if args.seed < 4:
         blackholes =  True
@@ -1236,14 +1208,7 @@ def main():
     # sim.save_data(proj="Cube", radio=False, rotcurves=True)
     
     # sim = UniverseSim(800, seed=9999, isotropic=True, homogeneous=True, blackholes=True, darkmatter=False)
-    # sim.save_data(proj="Cube", radio=False, rotcurves=True)
-    
-    # for numclust in [400, 800]:
-    #     for proj in ["Cube", "DivCube"]:
-    #         for pretty in [True, False]:
-    #             print(numclust, proj, pretty)
-    #             sim = UniverseSim(numclust, seed=3948)
-    #             sim.save_data(proj=proj, pretty=pretty, radio=False)
+    # sim.save_data(proj="Cube", radio=False, rotcurves=True)=
     
 
     
