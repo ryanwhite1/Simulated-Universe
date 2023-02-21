@@ -571,11 +571,11 @@ class UniverseSim(object):
         print('Universe properties saved to', self.answerdirectory + '/Universe_Details.txt')
         # plot and save the hubble diagram for the universe
         hubblediag = self.universe.plot_hubblediagram(save=True) 
-        hubblediag.savefig(self.datadirectory + '/Hubble_Diagram.png', dpi=600, bbox_inches='tight', pad_inches = 0.01)
+        hubblediag.savefig(self.answerdirectory + '/Hubble_Diagram.png', dpi=600, bbox_inches='tight', pad_inches = 0.01)
         # hubblediag.savefig(self.datadirectory + '/Hubble Diagram.pdf', dpi=600, bbox_inches='tight', pad_inches = 0.01)
         # now plot and save the HR diagram for the local galaxy
         HR = self.galaxies[-1].plot_HR(isoradii=True, xunit="both", yunit="BolLumMag", variable=True, save=True)
-        HR.savefig(self.datadirectory + '/Local_Galaxy_HR_Diagram.png', dpi=600, bbox_inches='tight', pad_inches = 0.01)
+        HR.savefig(self.answerdirectory + '/Local_Galaxy_HR_Diagram.png', dpi=600, bbox_inches='tight', pad_inches = 0.01)
         plt.close('all')
         proptime2 = time(); total = proptime2 - proptime1; print("Universe properties saved in", total, "s")
         
@@ -1011,7 +1011,7 @@ class UniverseSim(object):
         ax.set_yscale('log'); ax.set_xlim(xmin=0)
         ax.set_xlabel("Period (hours)"); ax.set_ylabel(r"Log Luminosity ($L / L_\odot$)")
         plt.close()
-        fig.savefig(self.datadirectory + '/Period_Luminosity_Data.png', dpi=400, bbox_inches='tight', pad_inches = 0.01)
+        fig.savefig(self.answerdirectory + '/Period_Luminosity_Data.png', dpi=400, bbox_inches='tight', pad_inches = 0.01)
         
         vartime2 = time(); total = vartime2 - vartime1; print("Variable data saved in", total, "s")
     
