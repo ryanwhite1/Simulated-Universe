@@ -1219,7 +1219,7 @@ def main():
     
     # sim = UniverseSim(200, seed=6683)
     sim = UniverseSim(args.Ngal, seed=args.seed)
-    sim.save_data()
+    sim.save_data(rotcurves=True)
     
     # sim = UniverseSim(800, seed=1000, isotropic=False, homogeneous=False, blackholes=False, darkmatter=True)
     # sim.save_data(proj="Cube", radio=False, rotcurves=True)
