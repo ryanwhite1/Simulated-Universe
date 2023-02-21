@@ -1135,7 +1135,7 @@ class UniverseSim(object):
         ''' Save rotation curves for all of the galaxies and clusters in the universe, each in their own file. 
         '''
         rottime1 = time(); print("Saving galaxy rotation curves...")
-        rotcurvedirectory = self.datadirectory + "/Galaxy_Rotation_Curves"
+        rotcurvedirectory = self.answerdirectory + "/Galaxy_Rotation_Curves"
         os.makedirs(rotcurvedirectory)  # make a new folder to hold the rotation curves
         
         for galaxy in self.galaxies:
@@ -1148,7 +1148,7 @@ class UniverseSim(object):
         rottime2 = time(); total = rottime2 - rottime1; print("Galaxy rotation curves saved in", total, "s")
         
         print("Saving cluster rotation curves...")
-        clustercurvedirectory = self.datadirectory + "/Cluster_Rotation_Curves"
+        clustercurvedirectory = self.answerdirectory + "/Cluster_Rotation_Curves"
         os.makedirs(clustercurvedirectory)
         for cluster in self.universe.clusters:
             pop = cluster.clusterpop
