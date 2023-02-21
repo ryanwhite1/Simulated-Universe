@@ -114,7 +114,20 @@ class UniverseSim(object):
             os.makedirs(self.datadirectory)     # now create the duplicate directory with the number on the end
         else:
             os.makedirs(self.datadirectory)     # if directory doesn't exist, create it
-            
+
+        # answers
+        subdirectory = f"/Answers/universe_{self.seed}/"
+        self.answerdirectory = self.directory + subdirectory
+        if os.path.exists(self.answerdirectory):  # if this directory exists, we need to append a number to the end of it
+            i = 1
+            while os.path.exists(self.answerdirectory):   # this accounts for multiple copies that may exist
+                self.answerdirectory = self.answerdirectory + f" ({i})"   # add the number to the end
+                i += 1
+            os.makedirs(self.answerdirectory)     # now create the duplicate directory with the number on the end
+        else:
+            os.makedirs(self.answerdirectory)     # if directory doesn't exist, create it
+
+        
     def create_cubemap_directory(self, proj="Cube"):
         ''' Creates the directional folders needed for the cubemap projection data/images.
         A folder is created for each of ['Front', 'Back', 'Top', 'Bottom', 'Left', 'Right'].
@@ -515,10 +528,14 @@ class UniverseSim(object):
         '''
         if not self.datadirectory:
             self.create_directory()
+
+        if not self.answerdirectory:
+            self.create_answerdirectory()
+
             
         proptime1 = time(); print("Writing universe properties...")
         # now to write the universe properties to a file. They're all pretty self-explanatory.
-        text = open(self.datadirectory + '/Universe_Details.txt', "w")
+        text = open(self.answerdirectory + '/Universe_Details.txt', "w")
         text.write("Universe Parameters: \n")
         text.write("Parameter                   | Value   \n")
         text.write("----------------------------|---------------------------------------\n")
@@ -551,7 +568,7 @@ class UniverseSim(object):
                 text.write(f"                            | {variable}\n")
                 
         text.close()
-        print('Universe properties saved to', self.datadirectory + '/Universe_Details.txt')
+        print('Universe properties saved to', self.answerdirectory + '/Universe_Details.txt')
         # plot and save the hubble diagram for the universe
         hubblediag = self.universe.plot_hubblediagram(save=True) 
         hubblediag.savefig(self.datadirectory + '/Hubble_Diagram.png', dpi=600, bbox_inches='tight', pad_inches = 0.01)
@@ -575,7 +592,7 @@ class UniverseSim(object):
             self.create_directory()
         
         # first, save a file with all galaxy data (with formatted values)
-        with open(self.datadirectory + "/Galaxy_Details.txt", "w") as galax:
+        with open(self.answerdirectory + "/Galaxy_Details.txt", "w") as galax:
             if proj in ["Cube", "DivCube", "Both"]:
                 directions = np.array(["Front", "Back", "Top", "Bottom", "Left", "Right"])
                 galax.write("Face X Y Equat Polar Type Distance(pc) Radius(pc) NumStars Mass(Mo) BHMass(Mo)\n")
@@ -595,10 +612,10 @@ class UniverseSim(object):
                     equat, polar, dist = format(equat, '3.2f'), format(polar, '3.2f'), format(dist, '.0f')
                     radius, mass, bhmass = format(galaxy.radius, '.0f'), format(galaxy.galaxymass, '.0f'), format(galaxy.galaxyBHmass, '.0f')
                     galax.write(f"{equat} {polar} {galaxy.species} {dist} {radius} {len(galaxy.stars)} {mass} {bhmass}\n")
-        print('Galaxy properties saved to', self.datadirectory + "/Galaxy_Details.txt")
+        print('Galaxy properties saved to', self.answerdirectory + "/Galaxy_Details.txt")
                     
         # now save a file with all cluster data (formatted values)
-        with open(self.datadirectory + "/Cluster_Details.txt", "w") as clust:
+        with open(self.answerdirectory + "/Cluster_Details.txt", "w") as clust:
             if proj in ["Cube", "DivCube", "Both"]:
                 directions = np.array(["Front", "Back", "Top", "Bottom", "Left", "Right"])
                 clust.write("Face X Y Equat Polar NumGalax Distance(pc) Radius(pc) Mass(Mo)\n")
@@ -618,7 +635,7 @@ class UniverseSim(object):
                     equat, polar, dist = format(equat, '3.2f'), format(polar, '3.2f'), format(dist, '.0f')
                     radius, mass = format(cluster.radius, '.0f'), format(cluster.clustermass, '.0f')
                     clust.write(f"{equat} {polar} {cluster.clusterpop} {dist} {radius} {mass}\n")
-        print('Cluster properties saved to', self.datadirectory + "/Cluster_Details.txt")
+        print('Cluster properties saved to', self.answerdirectory + "/Cluster_Details.txt")
             
         
     def save_pic(self, radio=False, proj='AllSky', pretty=True, planetNeb=False):

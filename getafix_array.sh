@@ -10,7 +10,6 @@
 module load anaconda3/5.2.0
 eval "$(conda shell.bash hook)"
 conda activate ladder
-which python
 
 # Change to the directory where your Python script is located
 cd /data/uqbpope/Simulated-Universe
