@@ -1218,7 +1218,18 @@ def main():
     # sim.save_data()
     
     # sim = UniverseSim(200, seed=6683)
-    sim = UniverseSim(args.Ngal, seed=args.seed)
+
+    if seed < 4:
+        blackholes =  True
+    else:
+        blackholes = False
+    if seed > 7:
+        darkmatter=True 
+    else:
+        darkmatter = False
+
+
+    sim = UniverseSim(args.Ngal, seed=args.seed, blackholes=blackholes, darkmatter=darkmatter, isotropic=True, homogeneous=True)
     sim.save_data(rotcurves=True)
     
     # sim = UniverseSim(800, seed=1000, isotropic=False, homogeneous=False, blackholes=False, darkmatter=True)
