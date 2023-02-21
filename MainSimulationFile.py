@@ -1191,11 +1191,11 @@ def main():
     ap.add_argument('-N', '--Ngal', metavar='N', type=int, help='Number of Galaxies', default=200)
     args = ap.parse_args()
 
-    if args.seed < 4:
+    if args.seed < 8:
         blackholes =  True
     else:
         blackholes = False
-    if args.seed > 7:
+    if args.seed > 5:
         darkmatter=True 
     else:
         darkmatter = False
