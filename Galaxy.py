@@ -23,7 +23,7 @@ class Galaxy(object):
     '''
     def __init__(self, species, position, cartesian=False, blackhole=True, darkmatter=True, rotate=True, complexity="Normal",
                  variable=[True, [24.6, "Tri", -6.5, 59], [40.7, "Saw", -14, 64], [75.6, "Sine", 17.9, 35.1]],
-                 rotvels="Boosted"):
+                 rotvels="Boosted", seed=0):
         ''' A galaxy which hosts hundreds to thousands of randomly generated Star objects, potentially with a BlackHole object 
         at its center. 
         Parameters
@@ -51,7 +51,10 @@ class Galaxy(object):
         rotvels : str
             One of {"Normal", "Boosted"}, which dictates whether rotation curves have arbitrarily boosted velocity 
             magnitudes (possibly accounting for interstellar gas/dust mass?).
+        seed : int
+            Random number generation seed for this galaxy
         '''
+        np.random.seed(seed)
         self.darkmatter = darkmatter
         self.complexity = complexity
         self.species = species

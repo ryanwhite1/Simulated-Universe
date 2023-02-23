@@ -1206,11 +1206,6 @@ def main():
     sim = UniverseSim(args.Ngal, seed=args.seed, blackholes=blackholes, darkmatter=darkmatter, isotropic=True, homogeneous=True)
     sim.save_data(rotcurves=True)
     
-    # sim = UniverseSim(800, seed=1000, isotropic=False, homogeneous=False, blackholes=False, darkmatter=True)
-    # sim.save_data(proj="Cube", radio=False, rotcurves=True)
-    
-    # sim = UniverseSim(800, seed=9999, isotropic=True, homogeneous=True, blackholes=True, darkmatter=False)
-    # sim.save_data(proj="Cube", radio=False, rotcurves=True)=
     
 
     

@@ -68,7 +68,7 @@ class GalaxyCluster(object):
         elif rotvels == "Normal":
             self.clustermass = sum(self.galaxmasses) + self.darkmattermass
     
-    def generate_galaxy(self, species, position, local):
+    def generate_galaxy(self, species, position, rotate, seed):
         ''' Generate a Galaxy class object.
         Parameters
         ----------
@@ -76,8 +76,10 @@ class GalaxyCluster(object):
             The type of galaxy to generate
         position : 3-tuple
             The xyz position of the galaxy (cartesian coords)
-        local : bool
-            If true, generates a galaxy with no rotation (the local galaxy to the observer!)
+        rotate : bool
+            If true, generates a galaxy with rotation. If false, no rotation (the local galaxy to the observer!)
+        seed : int
+            Random number generation seed for this galaxy (only required for non-distant galaxies)
         Returns
         -------
         Galaxy : Galaxy object
@@ -85,9 +87,9 @@ class GalaxyCluster(object):
         if self.complexity == "Distant":
             return DistantGalaxy(species, position, cartesian=True, blackhole=self.blackholes, darkmatter=self.darkmatter)
         else:
-            return Galaxy(species, position, cartesian=True, rotate=local, blackhole=self.blackholes, 
+            return Galaxy(species, position, cartesian=True, rotate=rotate, blackhole=self.blackholes, 
                           darkmatter=self.darkmatter, complexity=self.complexity, variable=self.variable, 
-                          rotvels=self.rotvelMult)
+                          rotvels=self.rotvelMult, seed=seed)
     
     def generate_galaxies(self, population):
         ''' Uniformly distributes and generates galaxies within a sphere, with a central elliptical galaxy if the cluster
@@ -107,6 +109,7 @@ class GalaxyCluster(object):
         galaxpositions : numpy array
             Cartesian coordinates of each galaxy in the cluster (in relation to cluster center)
         '''
+        seeds = np.random.randint(0, 1e5, population)
         theta = np.random.uniform(0, 2*np.pi, population)
         phi = np.random.uniform(-1, 1, population)
         phi = np.arccos(phi)
@@ -128,15 +131,15 @@ class GalaxyCluster(object):
         species = self.species_picker(orbitradii, population)
         # print(species)
         if population >= 5:     # need a central elliptical galaxy, so generate n-1 galaxies
-            args = [(species[i], [x[i], y[i], z[i]], True) for i in range(len(x) - 1)]    # species type at galaxy location
+            args = [(species[i], [x[i], y[i], z[i]], True, seeds[i]) for i in range(len(x) - 1)]    # species type at galaxy location
         else:       # no central elliptical needed, so generate n galaxies
-            args = [(species[i], [x[i], y[i], z[i]], True) for i in range(len(x))]
+            args = [(species[i], [x[i], y[i], z[i]], True, seeds[i]) for i in range(len(x))]
 
         if population >= 10:
-            args.insert(0, ('cD', self.cartesian, True))  # insert a cD galaxy in the center of the cluster
+            args.insert(0, ('cD', self.cartesian, True, seeds[0]))  # insert a cD galaxy in the center of the cluster
         elif population >= 5:
             num = 9 - population    # more populous clusters will have a bigger, more spherical elliptical in their center
-            args.insert(0, (f'E{num}', self.cartesian, True))     # insert an elliptical galaxy in the center of the cluster
+            args.insert(0, (f'E{num}', self.cartesian, True, seeds[0]))     # insert an elliptical galaxy in the center of the cluster
         
         if self.local == True:  # generate a spiral galaxy near the observer, with no rotation
             # choose spiral type - we dont want S0 because they have fewer variable stars (due to their position on HR diagrams)
@@ -144,7 +147,7 @@ class GalaxyCluster(object):
             localgalaxy = np.random.choice(['SBa', 'SBb', 'Sa', 'Sb'])   
             localdist = np.random.uniform(15, 50)   # we don't want the observer in the center of the galaxy, but also not outside of it
             localx, localy, localz = misc.spherical_to_cartesian(180, 90, localdist)
-            args[-1] = (localgalaxy, [localx, localy, localz], False)   # replace the last galaxy in the cluster with this galaxy, with no rotation!
+            args[-1] = (localgalaxy, [localx, localy, localz], False, seeds[-1])   # replace the last galaxy in the cluster with this galaxy, with no rotation!
             # galaxpositions[-1, :] = np.array([localx, localy, localz])
             galaxpositions[-1, 0] = localx
             galaxpositions[-1, 1] = localy
@@ -157,7 +160,7 @@ class GalaxyCluster(object):
         else:   # distant galaxies actually generate faster without multiprocessing
             galaxies = []
             for arg in args:
-                galaxies.append(self.generate_galaxy(arg[0], arg[1], arg[2]))
+                galaxies.append(self.generate_galaxy(arg[0], arg[1], arg[2], arg[3]))
         
         galaxmasses = np.zeros(len(galaxies))
         for i, galaxy in enumerate(galaxies):
