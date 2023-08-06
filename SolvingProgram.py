@@ -7,7 +7,7 @@ Created on Thu Feb 23 16:13:14 2023
 
 ### --- UNCUBEMAPPING DATA --- ###
 # seed = input("Please enter the seed of the Universe you want to test:")
-seed = 4
+seed = 7
 datapath = f'universe_{seed}' # all of the data is within a folder in this .ipynb file's directory
 
 # import matplotlib.pyplot as plt
@@ -501,14 +501,23 @@ for i, flash in xrayData.iterrows():
         if (flash['Equat'] - delta <= equat <= flash['Equat'] + delta) and (flash['Polar'] - delta <= distGalaxData['Polar'][j] <= flash['Polar'] + delta):
             speeds[i] = distGalaxData['RadialVelocity'][j]
 
-import matplotlib.pyplot as plt
-fig, ax = plt.subplots()
-ax.scatter(xraydists, speeds)
-print(xraydists)
-print(speeds)
+for i, dist in enumerate(xraydists): # want to denoise the close flashes by putting them at 0 dist and velocity
+    if dist < 50000:
+        xraydists[i] = 0
+        speeds[i] = 0
 
 grad, yint = np.polyfit(xraydists, speeds, 1)
 xvals = np.array([0, max(xraydists)])
+
+
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots()
+ax.scatter(xraydists, speeds)
+ax.plot(xvals, grad * xvals + yint, 'r')
+print(xraydists)
+print(speeds)
+
+
 
 print(f"m = {round(grad * 1e6, 2)} km/s/Mpc; y-int = {round(yint, 2)} km/s")
 
