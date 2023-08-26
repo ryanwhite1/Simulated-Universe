@@ -267,19 +267,20 @@ class GalaxyCluster(object):
         
         # now we need to transform the galaxy back to the origin with no rotation
         x, y, z = x - self.cartesian[0], y - self.cartesian[1], z - self.cartesian[2]
-
+        
+        # now to generate random velocity directions for the galaxies
         direction = np.array([np.zeros(len(x)), np.zeros(len(x)), np.zeros(len(x))])
-        for i in range(len(x)):
-            xprop = np.random.uniform(-1, 1)
-            yprop = np.random.uniform(-1, 1)
-            while xprop**2 + yprop**2 > 1:
-                yprop = np.random.uniform(-1, 1)
-            zprop = np.sqrt(1 - (xprop**2 + yprop**2))  # 1 = x**2 + y**2 + z**2 => z = sqrt(1 - x**2 - y**2)
-            direction[0, i] = xprop; direction[1, i] = yprop; direction[2, i] = zprop
+        xprop = np.random.uniform(-1, 1, len(x))
+        yprop = np.random.uniform(-1, 1, len(x))
+        zprop = np.random.uniform(-1, 1, len(x))
+        mult = np.sqrt(1 / (xprop**2 + yprop**2 + zprop**2))         # find a multiplier so that the sum of the squares is not greater than 1
+        xprop *= mult; yprop *= mult; zprop *= mult
+        direction[0, :] = xprop; direction[1, :] = yprop; direction[2, :] = zprop
         # the squares of the directional velocity components must add up to one: 1 = xprop**2 + yprop**2 + zprop**2
-        # so, we can randomly sample xprop and yprop (between -1 and 1 so that the velocity has random xy direction), 
-        # making sure that the sum of their squares is not greater than one. Then, we can subtract the sum of their squares from
-        # 1 to find the z component. All of this together gives more or less random direction to the galaxies about the cluster center. 
+        # so, we can randomly sample xprop, yprop, and zprop (between -1 and 1 so that the velocity has random xyz direction), 
+        # making sure that the sum of their squares is not greater than one. 
+        # i.e., if we randomly sample xyz, we need that `mult^2 * (x^2 + y^2 + z^2) = 1 => mult = sqrt(1/(x^2 + y^2 + z^2))
+        # then we replace x = mult * x, y = mult * y, z = mult * z, so that their sums actually do add to 1. 
 
         x, y, z = self.galaxpositions  # getting the xyz again is cheaper than doing operations again
         

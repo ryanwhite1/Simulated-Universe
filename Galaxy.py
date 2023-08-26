@@ -591,6 +591,7 @@ class Galaxy(object):
         points = np.dot(misc.cartesian_rotation(-phi[1], 'y'), points)
         points = np.dot(misc.cartesian_rotation(-phi[0], 'x'), points)
         
+        # now to generate velocity directions
         x, y, z = points
         if self.species[0] == "S":  # spiral galaxy! explanation in the comment block below :)
             theta = np.arctan2(y, x)
@@ -606,19 +607,19 @@ class Galaxy(object):
         #     x => sin(theta), since we want theta angles between 0 and pi to have positive x-motion
         #     y => -cos(theta), since we want theta angles between -pi/2 and pi/2 to have negative y-motion
         #     z => normal(0, 0.05) since we want there to be negligible, but random z motion
-        else:   # elliptical galaxy! explanation in the comment block below
+        else:   # elliptical galaxy => random velocity direction! explanation in the comment block below
             direction = np.array([np.zeros(len(x)), np.zeros(len(x)), np.zeros(len(x))])
             xprop = np.random.uniform(-1, 1, len(x))
             yprop = np.random.uniform(-1, 1, len(x))
-            for i in range(len(xprop)):
-                while xprop[i]**2 + yprop[i]**2 > 1:
-                    yprop[i] = np.random.uniform(-1, 1)
-            zprop = np.random.choice([-1, 1], len(xprop)) * np.sqrt(1 - (xprop**2 + yprop**2))  # 1 = x**2 + y**2 + z**2 => z = sqrt(1 - x**2 - y**2)
+            zprop = np.random.uniform(-1, 1, len(x))
+            mult = np.sqrt(1 / (xprop**2 + yprop**2 + zprop**2))         # find a multiplier so that the sum of the squares is not greater than 1
+            xprop *= mult; yprop *= mult; zprop *= mult
             direction[0, :] = xprop; direction[1, :] = yprop; direction[2, :] = zprop
         # the squares of the directional velocity components must add up to one: 1 = xprop**2 + yprop**2 + zprop**2
-        # so, we can randomly sample xprop and yprop (between -1 and 1 so that the velocity has random xy direction), 
-        # making sure that the sum of their squares is not greater than one. Then, we can subtract the sum of their squares from
-        # 1 to find the z component. All of this together gives more or less random direction to the stars about the galactic center. 
+        # so, we can randomly sample xprop, yprop, and zprop (between -1 and 1 so that the velocity has random xyz direction), 
+        # making sure that the sum of their squares is not greater than one. 
+        # i.e., if we randomly sample xyz, we need that `mult^2 * (x^2 + y^2 + z^2) = 1 => mult = sqrt(1/(x^2 + y^2 + z^2))
+        # then we replace x = mult * x, y = mult * y, z = mult * z, so that their sums actually do add to 1. 
 
         direction = np.dot(misc.cartesian_rotation(phi[0], 'x'), direction)     # rotate the velocity vectors in the same way as before
         direction = np.dot(misc.cartesian_rotation(phi[1], 'y'), direction)
