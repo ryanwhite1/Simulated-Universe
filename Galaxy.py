@@ -560,18 +560,24 @@ class Galaxy(object):
             masses *= 10
             BHmass *= 4
         # now, create an array that stores the mass and orbital radius of each star in the form of [[m1, r1], [m2,r2], ...]
-        MassRadii = np.array([[masses[i] * 1.988 * 10**30, orbits[i] * 3.086 * 10**16] for i in range(len(masses))])    # units of kg and meters
+        MassRadii = np.vstack((masses * 1.988 * 10**30, orbits * 3.086 * 10**16)).T         # units of kg and meters
+        # to make compute time faster, lets sort this array
+        sort_orbits = np.argsort(orbits)
+        MassRadii = MassRadii[sort_orbits]
+        undo_sort = np.argsort(sort_orbits) # we'll also need to unsort it at some point to preserve the original order
         vel = np.zeros(len(MassRadii)); darkvel = np.zeros(len(MassRadii))  # initialise arrays to store velocities in
         for i in range(len(MassRadii)):
             R = MassRadii[i, 1] 
             # now to sum up all of the mass inside the radius R
-            M = sum([MassRadii[n, 0] if MassRadii[n, 1] < R else 0 for n in range(len(MassRadii))]) + BHmass
+            M = sum(MassRadii[:i, 0]) + BHmass if i != 0 else BHmass
             vel[i] = (np.sqrt(G * M / R) / 1000)    # calculate newtonian approximation of orbital velocity
             if self.darkmatter == True:
                 M += darkMass(R)    # add the average mass of dark matter inside the radius R
                 darkvel[i] = (np.sqrt(G * M / R) / 1000)    # newtonian approximation, now including dark matter
             else:
                 darkvel[i] = vel[i]
+        # now unsort the arrays to return them to their original order
+        MassRadii, vel, darkvel = MassRadii[undo_sort], vel[undo_sort], darkvel[undo_sort]
         
         velarray = np.array([vel, darkvel]) * np.random.normal(1, 0.01, len(vel))
    
