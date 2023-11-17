@@ -13,6 +13,7 @@ import os
 import pandas as pd
 from time import time
 from tqdm import tqdm     # this is a progress bar for a for loop
+
 import MiscTools as misc
 from BlackHole import BlackHole
 from Galaxy import Galaxy
@@ -20,9 +21,9 @@ from GalaxyCluster import GalaxyCluster
 from Star import Star
 from Nebula import Nebula
 from Universe import Universe
-from HTMLSite import Site
+from HTMLSite import HTMLSite
+from MKDocsSite import MkSite
 
-from argparse import ArgumentParser
 
 def plot_all_dopplers(galaxies):
     ''' Plot the radial velocities of a list of Galaxy objects onto an image. Mainly to be used for troubleshooting.
@@ -432,7 +433,7 @@ class UniverseSim(object):
             
     def save_data(self, properties=True, proj='Cube', pic=True, pretty=True, planetNeb=False, radio=False, stars=True, 
                   variablestars=True, blackbodies=False, distantgalax=True, flashes=True, doppler=[False, False], blackhole=False, 
-                  rotcurves=False, cutoff=[True, 1e-20], site=True, archive=True):
+                  rotcurves=False, cutoff=[True, 1e-20], site='', archive=True):
         ''' Generates some data, takes other data, and saves it to the system in a new directory within the file directory.
         .pdf images are commented out currently - uncomment them at your own risk! (.pdfs can be in excess of 90mb each!)
         Parameters
@@ -472,8 +473,9 @@ class UniverseSim(object):
         cutoff : list of [bool, float]
             The *minimum* flux of objects that will be 'detected' and saved into the data file. The first element is a
             bool (if True, the data is cutoff), and the second element is a float which is the minimum flux value.
-        site : bool
-            Whether to generate a set of .html files which mimic a crude website for a user to interact with and save data.
+        site : str
+            By default a blank string which evaluates to False, i.e. no website generated. Input 'html' or 'mkdocs' to
+            generate .html/.md files for use in a website. 
         '''
         print("Starting data saving..."); t0 = time()
         if not self.datadirectory:
@@ -516,8 +518,8 @@ class UniverseSim(object):
             dopplertime2 = time(); total = dopplertime2 - dopplertime1; print("Doppler image saved in", total, "s")
         if rotcurves:   # plot and save the rotation curve of each resolved galaxy
             self.save_rotcurves()
-        if site: # create a crude html site for a user to interact with and download data
-            self.create_site(directory=self.datadirectory, proj=proj, flashes=flashes, variables=variablestars)
+        if bool(site): # create files for use in a site for a user to interact with and download data
+            self.create_site(directory=self.datadirectory, proj=proj, flashes=flashes, variables=variablestars, filetype=site)
         if archive:
             self.archive_data()
         
@@ -1160,8 +1162,9 @@ class UniverseSim(object):
         plt.close('all')
         rottime3 = time(); total = rottime3 - rottime2; print("Cluster rotation curves saved in", total, "s")
     
-    def create_site(self, directory, proj, flashes=True, variables=True):
-        ''' Creates a set of .html files which mimics a crude website to interact with and save the data. 
+    def create_site(self, directory, proj, flashes=True, variables=True, filetype='html'):
+        ''' Creates a set of .html files which mimics a crude website to interact with and save the data, or .md files
+            to be used with an existing mkdocs website. 
         Parameters
         ----------
         directory : str
@@ -1170,11 +1173,16 @@ class UniverseSim(object):
             One of {'AllSky', 'Cube', 'Both', 'DivCube'} to determine output of images/data
         flashes : bool
             If we've saved the flash events. Will generate a section in the top-level index file about xray flashes
+        filetype : str
+            One of 'html' or 'mkdocs', which chooses the format and filetypes of the generated site data. 
         '''
-        print("Generating HTML files...")
+        print("Generating site files...")
         t1 = time()
-        Site(directory, proj=proj, flashes=flashes, variables=variables)
-        t2 = time(); t = t2 - t1; print(f"HTML Files created in {t} s")
+        if filetype == 'html':
+            HTMLSite(directory, proj=proj, flashes=flashes, variables=variables)
+        elif filetype == 'mkdocs':
+            MkSite(directory, proj=proj, flashes=flashes, variables=variables)
+        t2 = time(); t = t2 - t1; print(f"Site Files created in {t} s")
         
     def archive_data(self):
         ''' Adds all of the files from *this* dataset to a .zip archive (with the same name) in the Datasets folder.
@@ -1184,8 +1192,11 @@ class UniverseSim(object):
         import shutil
         shutil.make_archive(self.datadirectory, 'zip', self.datadirectory + "/")
         t2 = time(); t = t2 - t1; print(f"Data archived in {t} s")
-        
-def main():
+
+def HPC_generate():
+    ''' Code written by Ben to generate and save multiple universes on getafix. 
+    '''
+    from argparse import ArgumentParser
     ap = ArgumentParser(description='Generate realistic simulated universes for PHYS3080 at UQ')
     ap.add_argument('-s', '--seed', metavar='S', type=int, help='Random Seed', default=6683)
     ap.add_argument('-N', '--Ngal', metavar='N', type=int, help='Number of Galaxies', default=200)
@@ -1202,12 +1213,17 @@ def main():
     else:
         darkmatter = False
 
-
     sim = UniverseSim(args.Ngal, seed=args.seed, blackholes=blackholes, darkmatter=darkmatter, isotropic=True, homogeneous=True)
     sim.save_data(rotcurves=True)
+        
+def main():
+    ### If generating for PHYS3080, use the below ###
+    HPC_generate()
     
+    ### Otherwise, use the below: ###
+    sim = UniverseSim(100)
+    sim.save_data()
     
-
     
 if __name__ == "__main__":
     main()

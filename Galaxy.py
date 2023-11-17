@@ -499,9 +499,9 @@ class Galaxy(object):
         for i in range(n):
             if val[i] <= probs[0]:
                 choice.append("MS")
-            elif val[i] <= probs[1] + probs[0]:
+            elif val[i] <= sum(probs[:2]):
                 choice.append("Giant")
-            elif val[i] <= probs[2] + probs[1] + probs[0]:
+            elif val[i] <= sum(probs[:3]):
                 choice.append("SupGiant")
             else:
                 choice.append("WDwarf")

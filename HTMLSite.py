@@ -8,7 +8,7 @@ import os
 import matplotlib.pyplot as plt
 import pandas as pd
 
-class Site(object):
+class HTMLSite(object):
     ''' Should be used in conjunction with the UniverseSim object to generate a (very) basic html site which provides a more 
     user friendly interface for analysing data. 
     '''
