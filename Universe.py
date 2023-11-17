@@ -445,7 +445,7 @@ class Universe(object):
         '''
         allgalaxies = self.distantgalaxies + self.galaxies
         indexes = np.random.uniform(0, len(allgalaxies) - 1, frequency - 2)     # choose positions of the supernovae in terms of random galaxy indexes
-        closeindexes = len(allgalaxies) - np.random.uniform(1, 14, 2)     # gets two indexes within the last 14 of the galaxy list
+        closeindexes = len(allgalaxies) - (np.random.choice(range(13), size=2, replace=False) + 1)     # gets two indexes within the last 14 of the galaxy list
         indexes = np.append(indexes, closeindexes); np.random.shuffle(indexes)  # shuffle the indexes so its not as obvious that the last two supernovae are in close galaxies
         galaxies = [allgalaxies[int(i)] for i in indexes]
         positions = np.array([galaxy.spherical for galaxy in galaxies])
