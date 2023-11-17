@@ -2,82 +2,117 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/</loc>
-         <lastmod>2023-04-17</lastmod>
+         <lastmod>2023-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/About/</loc>
-         <lastmod>2023-04-17</lastmod>
+         <lastmod>2023-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/Datasets/</loc>
-         <lastmod>2023-04-17</lastmod>
+         <lastmod>2023-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/GitHub%20README/</loc>
-         <lastmod>2023-04-17</lastmod>
+         <lastmod>2023-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/License/</loc>
-         <lastmod>2023-04-17</lastmod>
+         <lastmod>2023-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/Analysing%20Data/Uncertainties/</loc>
-         <lastmod>2023-04-17</lastmod>
+         <lastmod>2023-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/Analysing%20Data/UsefulFormulae/</loc>
-         <lastmod>2023-04-17</lastmod>
+         <lastmod>2023-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/Analysing%20Data/introduction/</loc>
-         <lastmod>2023-04-17</lastmod>
+         <lastmod>2023-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/Analysing%20Data/Walkthrough/Distance%20Ladder%20I%3B%20Resolved%20Galaxies/</loc>
-         <lastmod>2023-04-17</lastmod>
+         <lastmod>2023-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/Analysing%20Data/Walkthrough/Distance%20Ladder%20II%3B%20X-Ray%20Flashes%20and%20Distant%20Galaxies/</loc>
-         <lastmod>2023-04-17</lastmod>
+         <lastmod>2023-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/Analysing%20Data/Walkthrough/GalaxyFinding/</loc>
-         <lastmod>2023-04-17</lastmod>
+         <lastmod>2023-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/Analysing%20Data/Walkthrough/HR_Temp/</loc>
-         <lastmod>2023-04-17</lastmod>
+         <lastmod>2023-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/Analysing%20Data/Walkthrough/Local%20Universe/</loc>
-         <lastmod>2023-04-17</lastmod>
+         <lastmod>2023-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/Analysing%20Data/Walkthrough/Rotation%20Curves/</loc>
-         <lastmod>2023-04-17</lastmod>
+         <lastmod>2023-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/Analysing%20Data/Walkthrough/Un-Cubemapping%20Data/</loc>
-         <lastmod>2023-04-17</lastmod>
+         <lastmod>2023-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://ryanwhite1.github.io/Simulated-Universe/Analysing%20Data/Walkthrough/introduction/</loc>
-         <lastmod>2023-04-17</lastmod>
+         <lastmod>2023-11-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ryanwhite1.github.io/Simulated-Universe/Datasets/universe_6604/BackSubMain/</loc>
+         <lastmod>2023-11-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ryanwhite1.github.io/Simulated-Universe/Datasets/universe_6604/BottomSubMain/</loc>
+         <lastmod>2023-11-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ryanwhite1.github.io/Simulated-Universe/Datasets/universe_6604/FrontSubMain/</loc>
+         <lastmod>2023-11-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ryanwhite1.github.io/Simulated-Universe/Datasets/universe_6604/LeftSubMain/</loc>
+         <lastmod>2023-11-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ryanwhite1.github.io/Simulated-Universe/Datasets/universe_6604/RightSubMain/</loc>
+         <lastmod>2023-11-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ryanwhite1.github.io/Simulated-Universe/Datasets/universe_6604/TopSubMain/</loc>
+         <lastmod>2023-11-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://ryanwhite1.github.io/Simulated-Universe/Datasets/universe_6604/datasetMain/</loc>
+         <lastmod>2023-11-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
