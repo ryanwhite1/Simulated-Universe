@@ -21,8 +21,7 @@ from GalaxyCluster import GalaxyCluster
 from Star import Star
 from Nebula import Nebula
 from Universe import Universe
-from HTMLSite import HTMLSite
-from MKDocsSite import MkSite
+from DataSite import HTMLSite, MkSite
 
 
 def plot_all_dopplers(galaxies):
@@ -861,7 +860,7 @@ class UniverseSim(object):
             starfile = pd.DataFrame(stardata)
             
             starfile.to_csv(self.datadirectory + "/All_Star_Data.csv", index=None, sep=',')    # and finally save the dataframe to the directory
-            print('Star data saved to',self.datadirectory + "/All_Star_Data.csv")
+            print('Star data saved to', self.datadirectory + "/All_Star_Data.csv")
         startime2 = time(); total = startime2 - startime1; print("Star Data saved in", total, "s")
         
     def save_distant_galaxies(self, proj='AllSky', evolution=True, cutoff=[True, 1e-22]):
@@ -957,7 +956,7 @@ class UniverseSim(object):
                             DGfile = pd.DataFrame(DGdata)
                             fname = self.datadirectory + f"/{direction}/{X}{Y}/Distant_Galaxy_Data.csv"
                             DGfile.to_csv(fname, index=None, sep=',')    # and finally save the dataframe to the directory
-        print('Saved to', fname)
+        # print('Saved to', fname)
         distanttime2 = time(); total = distanttime2 - distanttime1; print("Distant galaxy data saved in", total, "s")
         
     def save_variables(self, cutoff=[True, 1e-22]):
@@ -999,7 +998,7 @@ class UniverseSim(object):
                         variablefile = pd.DataFrame(variabledata)
                         fname = variabledirectory + f"/{direction}{starname}.csv"
                         variablefile.to_csv(fname, index=None, sep=',')
-                        print('Saved to', fname)
+                        # print('Saved to', fname)
                 k += 1
         
         # now to take and plot the period-luminosity data of the local galaxy!
@@ -1061,7 +1060,7 @@ class UniverseSim(object):
             flashfile = pd.DataFrame(flashdata)
             fname = self.datadirectory + "/Flash_Data.csv"
             flashfile.to_csv(fname, index=None, sep=',')
-        print('Saved to', fname)
+        # print('Saved to', fname)
         supertime2 = time(); total = supertime2 - supertime1; print("Flash data saved in", total, "s")
     
     def save_blackbodies(self):
@@ -1130,7 +1129,7 @@ class UniverseSim(object):
             BHfile = pd.DataFrame(BHdata)
             fname = self.datadirectory + "/Radio_Source_Data.csv"
             BHfile.to_csv(fname, index=None, sep=',')
-        print('Saved to',fname)
+        # print('Saved to',fname)
         bhtime2 = time(); total = bhtime2 - bhtime1; print("Black hole data saved in", total, "s")
     
     def save_rotcurves(self):
@@ -1199,7 +1198,7 @@ def HPC_generate():
     from argparse import ArgumentParser
     ap = ArgumentParser(description='Generate realistic simulated universes for PHYS3080 at UQ')
     ap.add_argument('-s', '--seed', metavar='S', type=int, help='Random Seed', default=6683)
-    ap.add_argument('-N', '--Ngal', metavar='N', type=int, help='Number of Galaxies', default=200)
+    ap.add_argument('-N', '--Ngal', metavar='N', type=int, help='Number of Galaxy Clusters', default=200)
     args = ap.parse_args()
 
     if args.seed > 4:
@@ -1221,8 +1220,8 @@ def main():
     HPC_generate()
     
     ### Otherwise, use the below: ###
-    sim = UniverseSim(100)
-    sim.save_data()
+    # sim = UniverseSim(100)
+    # sim.save_data(site='mkdocs')
     
     
 if __name__ == "__main__":

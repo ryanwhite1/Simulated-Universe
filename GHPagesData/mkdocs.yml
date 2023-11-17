@@ -23,7 +23,16 @@ repo_url: https://github.com/ryanwhite1/Simulated-Universe
 edit_uri: ""
 nav: 
     - 'Home': index.md
-    - 'Datasets': Datasets.md
+    - 'Datasets': 
+        - Overview: Datasets.md
+        - Universe 6604: 
+            - Main: 'Datasets/universe_6604/datasetMain.md'
+            - 'Front': Datasets/universe_6604/FrontSubMain.md
+            - 'Back': Datasets/universe_6604/BackSubMain.md
+            - 'Left': Datasets/universe_6604/LeftSubMain.md
+            - 'Right': Datasets/universe_6604/RightSubMain.md
+            - 'Top': Datasets/universe_6604/TopSubMain.md
+            - 'Bottom': Datasets/universe_6604/BottomSubMain.md
     - 'Analysing Data':
         - Introduction: Analysing Data/introduction.md
         - Uncertainties in Data: Analysing Data/Uncertainties.md

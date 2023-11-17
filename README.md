@@ -10,7 +10,13 @@ As part of the University of Queensland course *PHYS3080 - Extragalactic Astroph
 As python is the language I'm most capable in, this project is written entirely in python. Several packages were used extensively, including but not limited to: `numpy`, `matplotlib`, `pandas`, `multiprocessing`, and `scipy`.
 
 ## How to use the Program
-Unless you intend to see the inner workings of the sim, the only file you would need to open is `MainSimulationFile.py`. To create a new dataset, just open this in your Python IDE of choice (or even just double click!), and run the program. This will create a new dataset in the "Datasets" folder, with a naming convention of "Sim Data (Clusters; {pop}, Seed; {seed})", where `pop` is the number of clusters and the `seed` parameter is just the seed for the random number generating in the program. Once the dataset is created, you can head over to the Datasets directory and take the .txt files within to analyse that universe!
+Unless you intend to see the inner workings of the sim, the only file you would need to open is `MainSimulationFile.py`. To create a new dataset, just open this in your Python IDE of choice (or even just double click!) and edit the `main()` function. A good starting point is to run the code
+```python
+def main():
+    sim = UniverseSim(100, hubble=1000)
+    sim.save_data(site='html')
+```
+This will create a new dataset in the "Datasets" folder. Once the dataset is created, you can head over to the Datasets directory and take the .txt files within to analyse that universe!
 
 ## Extent of Simulation
 Several real aspects of astronomy are modelled (to varying degrees of accuracy) in this simulation. Below is a non-exhaustive list of the physical properties that could, in theory, be derived via quantitative and qualitative means from the output data `.txt` files. In the likely case that I can't follow that theme, the dot points show what and how some things were simulated.
