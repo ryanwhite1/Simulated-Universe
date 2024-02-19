@@ -1215,7 +1215,7 @@ def HPC_generate():
         darkmatter = False
 
     sim = UniverseSim(args.Ngal, seed=seed, blackholes=blackholes, darkmatter=darkmatter, isotropic=True, homogeneous=True)
-    sim.save_data(rotcurves=True)
+    sim.save_data(rotcurves=True, site='mkdocs')
         
 def main():
     ### If generating for PHYS3080, use the below ###

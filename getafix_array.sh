@@ -4,7 +4,7 @@
 #SBATCH --ntasks-per-node=6
 #SBATCH --mem-per-cpu=32G
 #SBATCH --time=0-00:30:00
-#SBATCH --array=1-12
+#SBATCH --array=1-10
 
 # Load the necessary modules
 module load anaconda3/5.2.0
