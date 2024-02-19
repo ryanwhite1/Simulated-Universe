@@ -1201,18 +1201,20 @@ def HPC_generate():
     ap.add_argument('-N', '--Ngal', metavar='N', type=int, help='Number of Galaxy Clusters', default=200)
     args = ap.parse_args()
 
-    if args.seed > 4:
+    seed = args.seed + 2024
+
+    if seed > 4:
         blackholes = True
     else:
         blackholes = False
-    if args.seed <= 6:
+    if seed <= 6:
         darkmatter = True 
-    elif args.seed >= 11:
+    elif seed >= 11:
         darkmatter = True 
     else:
         darkmatter = False
 
-    sim = UniverseSim(args.Ngal, seed=args.seed, blackholes=blackholes, darkmatter=darkmatter, isotropic=True, homogeneous=True)
+    sim = UniverseSim(args.Ngal, seed=seed, blackholes=blackholes, darkmatter=darkmatter, isotropic=True, homogeneous=True)
     sim.save_data(rotcurves=True)
         
 def main():
