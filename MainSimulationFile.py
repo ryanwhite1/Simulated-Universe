@@ -77,7 +77,7 @@ class UniverseSim(object):
             event type determines the format of the output data (photon count of flash, or W/m^2 respectively)
         '''
         self.seed = seed if seed != None else int(np.random.uniform(0, 9999)) # randomly choose a <=4 digit seed if one isn't given
-        np.random.seed(seed)
+        np.random.seed(seed+2024)
         self.universe = Universe(450000, numclusters, hubble, blackholes=blackholes, darkmatter=darkmatter, complexity=mode,
                                  homogeneous=homogeneous, isotropic=isotropic, rotvels=rotvels, event=event)
         self.hasblackhole = blackholes 
@@ -1201,7 +1201,7 @@ def HPC_generate():
     ap.add_argument('-N', '--Ngal', metavar='N', type=int, help='Number of Galaxy Clusters', default=200)
     args = ap.parse_args()
 
-    seed = args.seed + 2024
+    seed = args.seed
 
     if seed > 4:
         blackholes = True
@@ -1216,6 +1216,7 @@ def HPC_generate():
 
     sim = UniverseSim(args.Ngal, seed=seed, blackholes=blackholes, darkmatter=darkmatter, isotropic=True, homogeneous=True)
     sim.save_data(rotcurves=True, site='mkdocs')
+    sim.save_pic()
         
 def main():
     ### If generating for PHYS3080, use the below ###
