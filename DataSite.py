@@ -43,7 +43,8 @@ class HTMLSite(object):
         '''
         with open(self.directory + "/index.html", "w") as index:
             index.write("<html>\n<head>\n<title>Data Home</title>\n</head>\n<body>")
-            
+            index.write("<H1> Image from the All Sky Widefield Camera: </H1><BR>\n")
+            index.write(f'<IMG SRC="./AllSky_Universe_Image.png" WIDTH="600"><BR>')
             if self.proj in ["Cube", "DivCube"]:
                 index.write("<H1> Images from the Wide Field Cameras: </H1>")
                 index.write("Click on the images for the data on that part of the sky!\n<hr>")
