@@ -30,12 +30,14 @@ def plot_all_dopplers(galaxies):
     fig, (ax, cbar_ax) = plt.subplots(1, 2, gridspec_kw={'width_ratios': [30,1]})
     for galaxy in galaxies:
         galaxy.plot_doppler(fig, ax, cbar_ax, blackhole=True)
+
 def plot_all_2d(galaxies, spikes=False, radio=False):
     ''' Plot the positions, colours and brightness of a list of Galaxy objects onto an image. Mainly to be used for troubleshooting.
     '''
     fig, ax = plt.subplots()
     for galaxy in galaxies:
         galaxy.plot_2d(fig, ax, spikes=spikes, radio=radio)
+
 def plot_all_3d(galaxies):
     ''' Plot 3D galaxies from a list of Galaxy objects. Mainly to be used for troubleshooting.
     '''
@@ -430,7 +432,7 @@ class UniverseSim(object):
             return fig
         
             
-    def save_data(self, properties=True, proj='Cube', pic=True, pretty=True, planetNeb=False, radio=False, stars=True, 
+    def save_data(self, properties=True, proj='Both', pic=True, pretty=True, planetNeb=False, radio=False, stars=True, 
                   variablestars=True, blackbodies=False, distantgalax=True, flashes=True, doppler=[False, False], blackhole=False, 
                   rotcurves=False, cutoff=[True, 1e-20], site='', archive=True):
         ''' Generates some data, takes other data, and saves it to the system in a new directory within the file directory.
@@ -1215,7 +1217,7 @@ def HPC_generate():
         darkmatter = False
 
     sim = UniverseSim(args.Ngal, seed=seed, blackholes=blackholes, darkmatter=darkmatter, isotropic=True, homogeneous=True)
-    sim.save_data(rotcurves=True, site='mkdocs')
+    sim.save_data(rotcurves=True, site='html')
     sim.save_pic()
         
 def main():
