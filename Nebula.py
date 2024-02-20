@@ -68,7 +68,7 @@ class Nebula(object):
         mapdirectory = directory + "/Colourmaps"  # this is the name of the colourmap directory
         if not os.path.exists(mapdirectory): # then we need to create the directory for the colourmap
             os.makedirs(mapdirectory)
-        self.paletteDir = mapdirectory + f"\\{self.palette}.pickle" # this should be the name of the colour palette file
+        self.paletteDir = mapdirectory + f"/{self.palette}.pickle" # this should be the name of the colour palette file
         if not os.path.isfile(self.paletteDir): # if the colour palette doesn't exist,
             self.cmap = self.initColourMap(self.palette) # create it
         else: # if the colour palette does exist, 
