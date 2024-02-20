@@ -65,7 +65,7 @@ class Nebula(object):
         
         # now to create or load the colourmap for this nebulous object
         directory = os.path.dirname(os.path.realpath(__file__))    # this is where this .py file is located on the system
-        mapdirectory = directory + "\\Colourmaps"  # this is the name of the colourmap directory
+        mapdirectory = directory + "/Colourmaps"  # this is the name of the colourmap directory
         if not os.path.exists(mapdirectory): # then we need to create the directory for the colourmap
             os.makedirs(mapdirectory)
         self.paletteDir = mapdirectory + f"\\{self.palette}.pickle" # this should be the name of the colour palette file
