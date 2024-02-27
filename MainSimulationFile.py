@@ -79,7 +79,9 @@ class UniverseSim(object):
             event type determines the format of the output data (photon count of flash, or W/m^2 respectively)
         '''
         self.seed = seed if seed != None else int(np.random.uniform(0, 9999)) # randomly choose a <=4 digit seed if one isn't given
-        np.random.seed(seed+2024)
+        if seed < 20:
+            seed += 2024 + 50
+        np.random.seed(seed)
         self.universe = Universe(450000, numclusters, hubble, blackholes=blackholes, darkmatter=darkmatter, complexity=mode,
                                  homogeneous=homogeneous, isotropic=isotropic, rotvels=rotvels, event=event)
         self.hasblackhole = blackholes 

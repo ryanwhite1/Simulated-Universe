@@ -44,7 +44,7 @@ class HTMLSite(object):
         with open(self.directory + "/index.html", "w") as index:
             index.write("<html>\n<head>\n<title>Data Home</title>\n</head>\n<body>")
             index.write("<H1> Image from the All Sky Widefield Camera: </H1><BR>\n")
-            index.write(f'<IMG SRC="./AllSky_Universe_Image.png" WIDTH="600"><BR>')
+            index.write(f'<IMG SRC="./AllSky_Universe_Image.png" WIDTH="900"><BR>')
             if self.proj in ["Cube", "DivCube"]:
                 index.write("<H1> Images from the Wide Field Cameras: </H1>")
                 index.write("Click on the images for the data on that part of the sky!\n<hr>")
@@ -127,7 +127,7 @@ class HTMLSite(object):
                         index.write("<li> Positions: degrees\n<li> Flux: W/nm/m<sup>2</sup>\n<li> Parallax: arcsec\n<li> Radial Velocity: km/s\n<li> Variable: unitless (=1 if variable, =0 if not)</ul>")
                         index.write("<p>Uncertainties are (one standard deviation figures):<ul>")
                         index.write("<li> Fluxes: 1% \n<li> Positions: 0.0001 degrees \n<li> Parallaxes: 0.001 arcseconds\n<li> Radial Velocities: 0.03km/s</ul>")
-                        index.write('<A HREF="Star_Data.csv">Click here to download the star data in .csv format, suitable for loading into python or matlab!</A><br><hr>')
+                        index.write('<A HREF="Star_Data.csv">Click here to download the star data in .csv format, suitable for loading into python!</A><br><hr>')
                         
                         index.write("<H2> Distant Galaxies in this image </H2>")
                         index.write("<p><b>Note:</b> positive radial velocities indicated objects moving away from us.</p>")
@@ -136,7 +136,7 @@ class HTMLSite(object):
                         index.write("<li> Positions: degrees\n<li> Flux: W/nm/m<sup>2</sup>\n<li> Size: arcseconds\n<li> Radial Velocity: km/s</ul>")
                         index.write("<p>Uncertainties are (one standard deviation figures):<ul>")
                         index.write("<li> Fluxes: 1% \n<li> Positions: 0.0001 degrees \n<li> Sizes: 10% \n<li> Radial Velocities: 0.1km/s</ul>")
-                        index.write('<A HREF="Distant_Galaxy_Data.csv">Click here to download the distant galaxy data in .csv format, suitable for loading into python or matlab!</A><br><hr>')
+                        index.write('<A HREF="Distant_Galaxy_Data.csv">Click here to download the distant galaxy data in .csv format, suitable for loading into python!</A><br><hr>')
                     elif self.proj == "DivCube":
                         index.write("The above image is divided into a 6x6 grid, totalling 36 images. The subdivided images, and links to data contained within those images are available below! <br><hr>")
                         for j, Y in enumerate(["1", "2", "3", "4", "5", "6"]):
@@ -153,7 +153,7 @@ class HTMLSite(object):
                                     subindex.write("<li> Positions: degrees\n<li> Flux: W/nm/m<sup>2</sup>\n<li> Parallax: arcsec\n<li> Radial Velocity: km/s\n<li> Variable: unitless (=1 if variable, =0 if not)</ul>")
                                     subindex.write("<p>Uncertainties are (one standard deviation figures):<ul>")
                                     subindex.write("<li> Fluxes: 1% \n<li> Positions: 0.0001 degrees \n<li> Parallaxes: 0.001 arcseconds\n<li> Radial Velocities: 0.03km/s</ul>")
-                                    subindex.write('<A HREF="Star_Data.csv">Click here to download the star data in .csv format, suitable for loading into python or matlab!</A><br><hr>')
+                                    subindex.write('<A HREF="Star_Data.csv">Click here to download the star data in .csv format, suitable for loading into python!</A><br><hr>')
                                     
                                     subindex.write("<H2> Distant Galaxies in this image </H2>")
                                     subindex.write("<p><b>Note:</b> positive radial velocities indicated objects moving away from us.</p>")
@@ -162,7 +162,7 @@ class HTMLSite(object):
                                     subindex.write("<li> Positions: degrees\n<li> Flux: W/nm/m<sup>2</sup>\n<li> Size: arcseconds\n<li> Radial Velocity: km/s</ul>")
                                     subindex.write("<p>Uncertainties are (one standard deviation figures):<ul>")
                                     subindex.write("<li> Fluxes: 1% \n<li> Positions: 0.0001 degrees \n<li> Sizes: 10% \n<li> Radial Velocities: 0.1km/s</ul>")
-                                    subindex.write('<A HREF="Distant_Galaxy_Data.csv">Click here to download the distant galaxy data in .csv format, suitable for loading into python or matlab!</A><br><hr>')
+                                    subindex.write('<A HREF="Distant_Galaxy_Data.csv">Click here to download the distant galaxy data in .csv format, suitable for loading into python!</A><br><hr>')
                             index.write("<br>")
                         index.write("</body>")
                     
@@ -326,7 +326,7 @@ class MkSite(object):
                         secondary.write(" Measurement | Unit \n--- | ---\n Position | degrees\n Flux | W/nm/m^2^\n Parallax | arcsec\n Radial Velocity | km/s\n Variable | unitless (=1 if variable, =0 if not)\n\n")
                         secondary.write("Uncertainties in this data (one standard deviation figures) are:\n\n")
                         secondary.write(" Measurement | Uncertainty \n--- | ---\n Flux | 1%\n Position | 0.0001 degrees\n Parallax | 0.001 arcseconds\n Radial Velocity | 0.03km/s\n\n")
-                        secondary.write(f'[Click here to download the star data in .csv format, suitable for loading into python or matlab!]({direction}/Star_Data.csv)\n\n')
+                        secondary.write(f'[Click here to download the star data in .csv format, suitable for loading into python!]({direction}/Star_Data.csv)\n\n')
                         
                         secondary.write("### Distant Galaxies in this image\n")
                         secondary.write("**Note:** positive radial velocities indicated objects moving away from us.\n")
@@ -335,7 +335,7 @@ class MkSite(object):
                         secondary.write(" Measurement | Unit \n--- | ---\n Position | degrees\n Flux | W/nm/m^2^\n Size | arcseconds\n Radial Velocity | km/s\n\n")
                         secondary.write("Uncertainties in this data (one standard deviation figures) are:\n\n")
                         secondary.write(" Measurement | Uncertainty \n--- | ---\n Position | 0.0001 degrees \n Fluxes | 1% \n Size | 10% \n Radial Velocity | 0.1km/s\n\n")
-                        secondary.write(f'[Click here to download the distant galaxy data in .csv format, suitable for loading into python or matlab!]({direction}/Distant_Galaxy_Data.csv)\n')
+                        secondary.write(f'[Click here to download the distant galaxy data in .csv format, suitable for loading into python!]({direction}/Distant_Galaxy_Data.csv)\n')
                     elif self.proj == "DivCube":
                         secondary.write("The above image is divided into a 6x6 grid, totalling 36 images. The subdivided images, and links to data contained within those images are available below!\n")
                         for j, Y in enumerate(["1", "2", "3", "4", "5", "6"]):
@@ -352,7 +352,7 @@ class MkSite(object):
                                     subindex.write(" Measurement | Unit \n--- | ---\n Position | degrees\n Flux | W/nm/m^2^\n Parallax | arcsec\n Radial Velocity | km/s\n Variable | unitless (=1 if variable, =0 if not)\n")
                                     subindex.write("Uncertainties in this data (one standard deviation figures) are:\n\n")
                                     subindex.write(" Measurement | Uncertainty \n--- | ---\n Flux | 1%\n Position | 0.0001 degrees\n Parallax | 0.001 arcseconds\n Radial Velocity | 0.03km/s\n")
-                                    subindex.write('[Click here to download the star data in .csv format, suitable for loading into python or matlab!](Star_Data.csv)\n')
+                                    subindex.write('[Click here to download the star data in .csv format, suitable for loading into python!](Star_Data.csv)\n')
                                     
                                     subindex.write("### Distant Galaxies in this image\n")
                                     subindex.write("**Note:** positive radial velocities indicated objects moving away from us.\n")
@@ -361,7 +361,7 @@ class MkSite(object):
                                     subindex.write(" Measurement | Unit \n--- | ---\n Position | degrees\n Flux | W/nm/m^2^\n Size | arcseconds\n Radial Velocity | km/s\n\n")
                                     subindex.write("Uncertainties in this data (one standard deviation figures) are:\n\n")
                                     subindex.write(" Measurement | Uncertainty \n--- | ---\n Position | 0.0001 degrees\n Fluxes | 1% \nSize | 10% \n Radial Velocity | 0.1km/s\n\n")
-                                    subindex.write('[Click here to download the distant galaxy data in .csv format, suitable for loading into python or matlab!](Distant_Galaxy_Data.csv)\n')
+                                    subindex.write('[Click here to download the distant galaxy data in .csv format, suitable for loading into python!](Distant_Galaxy_Data.csv)\n')
     
     def create_md_table(self, datafile, delimiter=','):
         ''' Returns the markdown code for a basic table, with data from the datafile file.
