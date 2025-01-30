@@ -855,15 +855,17 @@ class UniverseSim(object):
                             
                             starfile.to_csv(self.datadirectory + f"/{direction}/{X}{Y}/Star_Data.csv", index=None, sep=',')    # and finally save the dataframe to the directory
                             print('DivCube star data saved to',self.datadirectory + f"/{direction}/{X}{Y}/Star_Data.csv")
-        # now, write all star data to a pandas dataframe
-        stardata = {'Name': names, 'Equatorial': equat, 'Polar': polar,        # units of the equat/polar are in degrees
-                    'BlueF': blueflux, 'GreenF': greenflux, 'RedF': redflux,   # units of these fluxes are in W/m^2/nm
-                    'Parallax': parallax, 'RadialVelocity': obsvel,           # units of parallax are in arcsec, obsvel in km/s
-                    'Variable?': variabool}                                  # outputs 1.0 if variable, 0.0 if not      
-        starfile = pd.DataFrame(stardata)
-        
-        starfile.to_csv(self.datadirectory + "/All_Star_Data.csv", index=None, sep=',')    # and finally save the dataframe to the directory
-        print('Star data saved to', self.datadirectory + "/All_Star_Data.csv")
+                            
+        if proj in ['AllSky', 'Both']:
+            # now, write all star data to a pandas dataframe
+            stardata = {'Name': names, 'Equatorial': equat, 'Polar': polar,        # units of the equat/polar are in degrees
+                        'BlueF': blueflux, 'GreenF': greenflux, 'RedF': redflux,   # units of these fluxes are in W/m^2/nm
+                        'Parallax': parallax, 'RadialVelocity': obsvel,           # units of parallax are in arcsec, obsvel in km/s
+                        'Variable?': variabool}                                  # outputs 1.0 if variable, 0.0 if not      
+            starfile = pd.DataFrame(stardata)
+            
+            starfile.to_csv(self.datadirectory + "/All_Star_Data.csv", index=None, sep=',')    # and finally save the dataframe to the directory
+            print('Star data saved to', self.datadirectory + "/All_Star_Data.csv")
         startime2 = time(); total = startime2 - startime1; print("Star Data saved in", total, "s")
         
     def save_distant_galaxies(self, proj='AllSky', evolution=True, cutoff=[True, 1e-22]):
